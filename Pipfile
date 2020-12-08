@@ -9,8 +9,13 @@ coverage = "*"
 Sphinx = "*"
 
 [packages]
-src = {editable = true, path = "./"}
+src = {editable = true,path = "./"}
 awscli = "*"
+prometheus-api-client = "*"
+matplotlib = "*"
+pandas = "*"
+plotly = "*"
+kaleido = "*"
 
 [requires]
 python_version = "3.8"
