@@ -13,9 +13,12 @@ src = {editable = true,path = "./"}
 awscli = "*"
 prometheus-api-client = "*"
 matplotlib = "*"
+seaborn = "*"
 pandas = "*"
 plotly = "*"
 kaleido = "*"
+pmdarima = "*"
+statsmodels = "*"
 
 [requires]
 python_version = "3.6"
