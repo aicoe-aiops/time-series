@@ -1,8 +1,7 @@
-# Time series data analysis
-
-
-## Monitoring cloud applications
-
+---
+title: Monitoring Cloud Applications using Time Series Analysis
+description: "Time Series Analysis"
+---
 
 ![Time series graph](docs/readme/image1.png "Time series graph")
 
@@ -18,14 +17,12 @@ For monolithic architectures, monitoring using metrics is a viable solution as t
 In the coming notebooks, we are going to discuss how we can manipulate, visualize, and learn from the time series metrics data. We will apply the existing statistical analysis and machine learning algorithms to come up with meaningful insights to solve common cloud monitoring issues.
 
 
-## Table of contents
+* **[Get Started](docs/get-started.md)**
 
+* **[How to Contribute](docs/contribute.md)**
 
+* **[Project Content](docs/content.md)**
 
-1. [Introduction](README.md)
+## Contact
 
-
-2. [Fetching metrics data](notebooks/ts-1-fetching-metrics.ipynb)
-
-
-3. [Manipulating and visualizing metrics data](notebooks/ts-2-visualization.ipynb)
+This project is maintained as part of the AIOps team in Red Hat’s AI CoE as part of the Office of the CTO. More information can be found at https://www.operate-first.cloud/.
