@@ -1,0 +1,14 @@
+format: jb-book
+root: README
+parts:
+  - caption: Getting started
+    chapters:
+    - file: docs/get-started
+    - file: docs/content
+    - file: docs/contribute
+  - caption: Time Series Analysis
+    chapters:
+    - file: notebooks/ts-1-fetching-metrics
+    - file: notebooks/ts-2-visualization
+    - file: notebooks/ts-3-concepts
+    - file: notebooks/ts-4-forecasting
