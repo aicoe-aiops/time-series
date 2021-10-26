@@ -1,0 +1,901 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetching metrics &#8212; Monitoring Cloud Applications using Time Series Analysis</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Time series manipulation and visualization" href="ts-2-visualization.html" />
+    <link rel="prev" title="Contribute to the Time Series Project" href="../docs/contribute.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Monitoring Cloud Applications using Time Series Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Contact
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/get-started.html">
+   Get Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/content.html">
+   Content
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/contribute.html">
+   Contribute to the Time Series Project
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Time Series Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Fetching metrics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ts-2-visualization.html">
+   Time series manipulation and visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ts-3-concepts.html">
+   Time series Concepts and modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ts-4-forecasting.html">
+   Forecasting
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/ts-1-fetching-metrics.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/aicoe-aiops/time-series"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/aicoe-aiops/time-series/issues/new?title=Issue%20on%20page%20%2Fnotebooks/ts-1-fetching-metrics.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/aicoe-aiops/time-series/master?urlpath=lab/tree/notebooks/ts-1-fetching-metrics.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        <a class="jupyterhub-button" href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https://github.com/aicoe-aiops/time-series&urlpath=lab/tree/time-series/notebooks/ts-1-fetching-metrics.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Fetching metrics
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installing-the-library">
+     Installing the library:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connecting-to-prometheus">
+     Connecting to Prometheus
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fetching-metrics-from-prometheus">
+     Fetching Metrics from Prometheus
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#examples-of-fetching-metrics-using-different-queries">
+       Examples of fetching metrics using different queries
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#collecting-historical-data">
+       Collecting Historical Data
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#creating-pandas-data-frame">
+       Creating pandas Data Frame
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#converting-utc-timestamp-to-python-datetime-object">
+         Converting utc timestamp to python datetime object
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="fetching-metrics">
+<h1>Fetching metrics<a class="headerlink" href="#fetching-metrics" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook, we will learn how to use the Prometheus API client for fetching and formatting the raw metrics obtained from a <a class="reference external" href="https://prometheus.io/">Prometheus</a> host to drive better data science analysis on these metrics.</p>
+<p>You can find more information about the functions of the <a class="reference external" href="https://prometheus-api-client-python.readthedocs.io/source/prometheus_api_client.html">API client here</a>.</p>
+<div class="section" id="installing-the-library">
+<h2>Installing the library:<a class="headerlink" href="#installing-the-library" title="Permalink to this headline">¶</a></h2>
+<p>To begin any exploratory analysis, we need to first install all the required packages.</p>
+<p>For this notebook in particular, the <a class="reference external" href="https://pypi.org/project/prometheus-api-client/">prometheus api client library</a> needs to be installed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip3 install prometheus-api-client</span>
+<span class="c1"># !pip3 install matplotlib pandas</span>
+
+<span class="kn">from</span> <span class="nn">prometheus_api_client</span> <span class="kn">import</span> <span class="n">PrometheusConnect</span>
+<span class="kn">from</span> <span class="nn">prometheus_api_client.metric_range_df</span> <span class="kn">import</span> <span class="n">MetricRangeDataFrame</span>
+<span class="kn">from</span> <span class="nn">prometheus_api_client.utils</span> <span class="kn">import</span> <span class="n">parse_datetime</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="connecting-to-prometheus">
+<h2>Connecting to Prometheus<a class="headerlink" href="#connecting-to-prometheus" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">PrometheusConnect</span></code> module of the library can be used to connect to a Prometheus host.</p>
+<p>To know more about this module, you can refer to the <a class="reference external" href="https://prometheus-api-client-python.readthedocs.io/en/master/source/prometheus_api_client.html#module-prometheus_api_client.prometheus_connect">documentation</a></p>
+<p>We will connect to a public prometheus instance: <a class="reference external" href="http://demo.robustperception.io:9090">http://demo.robustperception.io:9090</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prom_url</span> <span class="o">=</span> <span class="s2">&quot;http://demo.robustperception.io:9090&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prometheus uri: &quot;</span><span class="p">,</span> <span class="n">prom_url</span><span class="p">)</span>
+
+<span class="c1"># Creating the prometheus connect object with the required parameters</span>
+<span class="n">pc</span> <span class="o">=</span> <span class="n">PrometheusConnect</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">prom_url</span><span class="p">,</span> <span class="n">disable_ssl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Fetching a list of all metrics scraped by the Prometheus host.</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">all_metrics</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;metrics&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prometheus uri:  http://demo.robustperception.io:9090
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>metrics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ALERTS</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ALERTS_FOR_STATE</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>alertmanager_alerts</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>alertmanager_alerts_invalid_total</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>alertmanager_alerts_received_total</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>501</th>
+      <td>scrape_duration_seconds</td>
+    </tr>
+    <tr>
+      <th>502</th>
+      <td>scrape_samples_post_metric_relabeling</td>
+    </tr>
+    <tr>
+      <th>503</th>
+      <td>scrape_samples_scraped</td>
+    </tr>
+    <tr>
+      <th>504</th>
+      <td>scrape_series_added</td>
+    </tr>
+    <tr>
+      <th>505</th>
+      <td>up</td>
+    </tr>
+  </tbody>
+</table>
+<p>506 rows × 1 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="fetching-metrics-from-prometheus">
+<h2>Fetching Metrics from Prometheus<a class="headerlink" href="#fetching-metrics-from-prometheus" title="Permalink to this headline">¶</a></h2>
+<p>Every metric in Prometheus is stored as <strong>time series</strong> data: streams of timestamped values belonging to the same metric and the same set of labeled dimensions. Each of these time series is uniquely identified by:</p>
+<ul class="simple">
+<li><p><strong>metric name</strong> - Specifies the general feature of a system that is measured.
+E.g. <code class="docutils literal notranslate"><span class="pre">http_requests_total</span></code> - the total number of HTTP requests received.</p></li>
+<li><p><strong>labels</strong> - Provides more details to identify a particular dimensional instantiation of the metric. E.g. <code class="docutils literal notranslate"><span class="pre">http_requests_total{method=&quot;POST&quot;,</span> <span class="pre">handler=&quot;/api/tracks&quot;}</span></code>: all HTTP requests that used the method POST to the /api/tracks handler</p></li>
+</ul>
+<p>Prometheus provides a functional query language called <strong>PromQL (Prometheus Query Language)</strong> that lets the user select and aggregate time series data in real time.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_current_metric_value()</span></code> method in the library can be used to fetch metrics according to this PromQL format.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><p><strong>metric_name</strong> – (str) This is a PromQL query, a few examples can be found at <a class="reference external" href="https://prometheus.io/docs/prometheus/latest/querying/examples/">https://prometheus.io/docs/prometheus/latest/querying/examples/</a></p></li>
+<li><p><strong>params</strong> – (dict) Optional dictionary containing GET parameters to be sent along with the API request, such as “time”</p></li>
+</ul>
+<div class="section" id="examples-of-fetching-metrics-using-different-queries">
+<h3>Examples of fetching metrics using different queries<a class="headerlink" href="#examples-of-fetching-metrics-using-different-queries" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here, we are fetching the current values of a particular metric name</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">get_current_metric_value</span><span class="p">(</span><span class="s2">&quot;alertmanager_alerts&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;metric&#39;: {&#39;__name__&#39;: &#39;alertmanager_alerts&#39;,
+   &#39;instance&#39;: &#39;demo.robustperception.io:9093&#39;,
+   &#39;job&#39;: &#39;alertmanager&#39;,
+   &#39;state&#39;: &#39;active&#39;},
+  &#39;value&#39;: [1606158844.546, &#39;4&#39;]},
+ {&#39;metric&#39;: {&#39;__name__&#39;: &#39;alertmanager_alerts&#39;,
+   &#39;instance&#39;: &#39;demo.robustperception.io:9093&#39;,
+   &#39;job&#39;: &#39;alertmanager&#39;,
+   &#39;state&#39;: &#39;suppressed&#39;},
+  &#39;value&#39;: [1606158844.546, &#39;0&#39;]}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now, let&#39;s see if we can fetch a particular label configuration of this metric</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">get_current_metric_value</span><span class="p">(</span><span class="s2">&quot;alertmanager_alerts{state=&#39;active&#39;}&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;metric&#39;: {&#39;__name__&#39;: &#39;alertmanager_alerts&#39;,
+   &#39;instance&#39;: &#39;demo.robustperception.io:9093&#39;,
+   &#39;job&#39;: &#39;alertmanager&#39;,
+   &#39;state&#39;: &#39;active&#39;},
+  &#39;value&#39;: [1606158848.546, &#39;4&#39;]}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sum of all the values of a metric</span>
+<span class="c1"># You can also try methods such as rate, and count</span>
+<span class="c1"># More functions here: https://prometheus.io/docs/prometheus/latest/querying/examples/</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">get_current_metric_value</span><span class="p">(</span><span class="s2">&quot;sum(scrape_duration_seconds)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;metric&#39;: {}, &#39;value&#39;: [1606158849.597, &#39;0.042080264&#39;]}]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="collecting-historical-data">
+<h3>Collecting Historical Data<a class="headerlink" href="#collecting-historical-data" title="Permalink to this headline">¶</a></h3>
+<p>Suppose we want to fetch historical data instead of just the current value, say the past few days of data, we can do so by using the <code class="docutils literal notranslate"><span class="pre">get_metric_range_data()</span></code> method. This method will fetch the data for the specifed metric label configuration within the time range specified.
+Along with specifying the start_time and end_time for the metric data collection, we need to specify the chunk size or the amount of data requested in one go. A large chunk size can result in non responsive code if the data is huge. If the end goal is to create a data frame, the chunk size will not affect the final frame size. Therefore it is a good practice to make sure the chunk size is balanced, i.e, not too high or not too low.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric_data</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">get_metric_range_data</span><span class="p">(</span>
+    <span class="s2">&quot;alertmanager_alerts{job=&#39;alertmanager&#39;}&quot;</span><span class="p">,</span>  <span class="c1"># metric name and label config</span>
+    <span class="n">start_time</span><span class="o">=</span><span class="n">parse_datetime</span><span class="p">(</span>
+        <span class="s2">&quot;2d&quot;</span>
+    <span class="p">),</span>  <span class="c1"># datetime object for metric range start time</span>
+    <span class="n">end_time</span><span class="o">=</span><span class="n">parse_datetime</span><span class="p">(</span>
+        <span class="s2">&quot;now&quot;</span>
+    <span class="p">),</span>  <span class="c1"># datetime object for metric range end time</span>
+    <span class="n">chunk_size</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span>
+        <span class="n">hours</span><span class="o">=</span><span class="mi">12</span>
+    <span class="p">),</span>  <span class="c1"># timedelta object for duration of metric data downloaded in one request</span>
+<span class="p">)</span>
+<span class="n">metric_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;metric&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;__name__&#39;: &#39;alertmanager_alerts&#39;,
+ &#39;instance&#39;: &#39;demo.robustperception.io:9093&#39;,
+ &#39;job&#39;: &#39;alertmanager&#39;,
+ &#39;state&#39;: &#39;active&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-pandas-data-frame">
+<h3>Creating pandas Data Frame<a class="headerlink" href="#creating-pandas-data-frame" title="Permalink to this headline">¶</a></h3>
+<p>We can easily create a pandas data frame from the json response using the <code class="docutils literal notranslate"><span class="pre">MetricRangeDataFrame</span></code> class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric_df</span> <span class="o">=</span> <span class="n">MetricRangeDataFrame</span><span class="p">(</span><span class="n">metric_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>__name__</th>
+      <th>instance</th>
+      <th>job</th>
+      <th>state</th>
+      <th>value</th>
+    </tr>
+    <tr>
+      <th>timestamp</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1.605986e+09</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>active</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1.605986e+09</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>active</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1.605986e+09</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>active</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1.605986e+09</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>active</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1.605986e+09</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>active</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1.606159e+09</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>suppressed</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1.606159e+09</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>suppressed</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1.606159e+09</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>suppressed</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1.606159e+09</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>suppressed</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1.606159e+09</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>suppressed</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>34558 rows × 5 columns</p>
+</div></div></div>
+</div>
+<div class="section" id="converting-utc-timestamp-to-python-datetime-object">
+<h4>Converting utc timestamp to python datetime object<a class="headerlink" href="#converting-utc-timestamp-to-python-datetime-object" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">metric_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>__name__</th>
+      <th>instance</th>
+      <th>job</th>
+      <th>state</th>
+      <th>value</th>
+    </tr>
+    <tr>
+      <th>timestamp</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-11-21 19:14:16.102999926+00:00</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>active</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2020-11-21 19:14:26.095999956+00:00</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>active</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2020-11-21 19:14:36.095999956+00:00</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>active</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2020-11-21 19:14:46.098000050+00:00</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>active</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2020-11-21 19:14:56.105000019+00:00</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>active</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2020-11-23 19:13:26.095999956+00:00</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>suppressed</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2020-11-23 19:13:36.105000019+00:00</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>suppressed</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2020-11-23 19:13:46.114000082+00:00</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>suppressed</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2020-11-23 19:13:56.096999884+00:00</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>suppressed</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2020-11-23 19:14:06.095999956+00:00</th>
+      <td>alertmanager_alerts</td>
+      <td>demo.robustperception.io:9093</td>
+      <td>alertmanager</td>
+      <td>suppressed</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>34558 rows × 5 columns</p>
+</div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<p>Great! In this notebook we saw how to use prometheus api client to create a pandas time series dataframe that can be used for analysis. In the next post, we will learn how to manipulate and visualize this dataframe.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../docs/contribute.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Contribute to the Time Series Project</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="ts-2-visualization.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Time series manipulation and visualization</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By AIOps<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

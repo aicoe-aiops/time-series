@@ -1,0 +1,3082 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Time series Concepts and modelling &#8212; Monitoring Cloud Applications using Time Series Analysis</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Forecasting" href="ts-4-forecasting.html" />
+    <link rel="prev" title="Time series manipulation and visualization" href="ts-2-visualization.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Monitoring Cloud Applications using Time Series Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Contact
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/get-started.html">
+   Get Started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/content.html">
+   Content
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/contribute.html">
+   Contribute to the Time Series Project
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Time Series Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ts-1-fetching-metrics.html">
+   Fetching metrics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ts-2-visualization.html">
+   Time series manipulation and visualization
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Time series Concepts and modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ts-4-forecasting.html">
+   Forecasting
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/ts-3-concepts.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/aicoe-aiops/time-series"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/aicoe-aiops/time-series/issues/new?title=Issue%20on%20page%20%2Fnotebooks/ts-3-concepts.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/aicoe-aiops/time-series/master?urlpath=lab/tree/notebooks/ts-3-concepts.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        <a class="jupyterhub-button" href="https://jupyterhub-opf-jupyterhub.apps.smaug.na.operate-first.cloud/hub/user-redirect/git-pull?repo=https://github.com/aicoe-aiops/time-series&urlpath=lab/tree/time-series/notebooks/ts-3-concepts.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Time series Concepts and modelling
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contents">
+     Contents
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load Data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#concepts">
+     Concepts
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#standard-time-series">
+       Standard time series
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#white-noise">
+         White noise
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#random-walk">
+         Random walk
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stationarity">
+       Stationarity
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dickey-fuller-test">
+     Dickey Fuller Test
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#seasonality">
+       Seasonality
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#naive-decomposition">
+         Naive Decomposition
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#auto-correlation">
+       Auto-correlation
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#acf">
+         ACF
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#pacf-partial-auto-correlation">
+         PACF (Partial Auto correlation)
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modelling">
+     Modelling
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#linear-regression-model">
+       Linear Regression Model
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exponential-smoothing-model">
+       Exponential Smoothing Model
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#simple-exponential-smoothing">
+         Simple Exponential Smoothing
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#holt-s-double-exponential-smoothing-model">
+         Holt’s Double Exponential Smoothing Model
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#auto-regressive-ar-model">
+       Auto regressive (AR) Model
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#analyzing-the-residuals">
+         Analyzing the residuals
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#interpretation">
+         Interpretation
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#moving-average-model">
+       Moving average model
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#model-ma-1-arma-ts-order-0-1-p-q-where-p-is-ar-and-q-is-ma-param">
+         model_ma_1 = ARMA(ts, order=(0, 1))  ## p, q where p is AR and q is MA param
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#arma-ar-and-ma-models-together">
+     ARMA (AR and MA models together)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Analyzing the residuals
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#arima-models">
+       ARIMA models
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#arimax-exogenous-factors">
+     ARIMAX (Exogenous factors)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sarimax-seasonality">
+     SARIMAX (Seasonality)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#automated">
+     Automated
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#referrences">
+     Referrences
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="time-series-concepts-and-modelling">
+<h1>Time series Concepts and modelling<a class="headerlink" href="#time-series-concepts-and-modelling" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook, we shall study and experiment with the statistical tools used for time series data. We will begin with examining characteristics of a time series followed by modelling it. As an example, we take “node_memory_Active_bytes” which are the memory bytes that have been recently used by a node. It reflects the memory pressure on the node.
+This notebook can be used as a guideline to analyze, understand, and model any time series data.</p>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Load data</p></li>
+<li><p>Concepts</p>
+<ul>
+<li><p>Standard time series</p>
+<ul>
+<li><p>White noise</p></li>
+<li><p>Random walk</p></li>
+</ul>
+</li>
+<li><p>Stationarity</p>
+<ul>
+<li><p>Dicky Fuller Test</p></li>
+</ul>
+</li>
+<li><p>Seasonality</p>
+<ul>
+<li><p>Naive decomposition - Additive</p></li>
+<li><p>Multiplicative</p></li>
+<li><p>Synthetic seasonal data</p></li>
+</ul>
+</li>
+<li><p>Auto Correlation</p>
+<ul>
+<li><p>ACF</p></li>
+<li><p>PACF</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Modelling</p>
+<ul>
+<li><p>Manual</p>
+<ul>
+<li><p>Linear Regression</p></li>
+<li><p>Exponential Smoothing</p></li>
+<li><p>AR</p></li>
+<li><p>MA</p></li>
+<li><p>ARMA</p></li>
+<li><p>ARIMA</p></li>
+<li><p>SARIMAX</p></li>
+</ul>
+</li>
+<li><p>Automatic</p>
+<ul>
+<li><p>Auto ARIMA</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="load-data">
+<h2>Load Data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prometheus_api_client</span> <span class="kn">import</span> <span class="n">PrometheusConnect</span>  <span class="c1"># noqa: F401</span>
+<span class="kn">from</span> <span class="nn">prometheus_api_client.metric_range_df</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># noqa: F401</span>
+    <span class="n">MetricRangeDataFrame</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">datetime</span>  <span class="c1"># noqa: F401</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.api</span> <span class="kn">import</span> <span class="n">SimpleExpSmoothing</span><span class="p">,</span> <span class="n">Holt</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">adfuller</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
+<span class="kn">import</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="k">as</span> <span class="nn">sgt</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima_model</span> <span class="kn">import</span> <span class="n">ARMA</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima_model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.statespace.sarimax</span> <span class="kn">import</span> <span class="n">SARIMAX</span>
+<span class="kn">from</span> <span class="nn">pmdarima</span> <span class="kn">import</span> <span class="n">auto_arima</span>
+<span class="kn">from</span> <span class="nn">scipy.stats.distributions</span> <span class="kn">import</span> <span class="n">chi2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # To ensure reproducibilty, use the saved snapshot of time series data.</span>
+<span class="c1"># # For modelling on your own as an exercise, fetch new data using this cell.</span>
+
+<span class="c1"># # Creating the prometheus connect object with the required parameter</span>
+<span class="c1"># prom_url = &quot;http://demo.robustperception.io:9090&quot;</span>
+<span class="c1"># pc = PrometheusConnect(url=prom_url, disable_ssl=True)</span>
+
+<span class="c1"># # Request fixed data for 1 week</span>
+<span class="c1"># start_time = datetime(2021, 2, 2)</span>
+<span class="c1"># end_time = datetime(2021, 2, 9)</span>
+<span class="c1"># metric_data = pc.get_metric_range_data(</span>
+<span class="c1">#     &quot;node_memory_Active_bytes&quot;,  # metric name and label config</span>
+<span class="c1">#     start_time=start_time,  # datetime object for metric range start time</span>
+<span class="c1">#     end_time=end_time,</span>
+<span class="c1">#     chunk_size=timedelta(</span>
+<span class="c1">#         days=1</span>
+<span class="c1">#     ),  # timedelta object for duration of metric data downloaded in one request</span>
+<span class="c1"># )</span>
+
+<span class="c1"># ## Make the dataframe</span>
+<span class="c1"># metric_df = MetricRangeDataFrame(metric_data)</span>
+<span class="c1"># metric_df.index = pd.to_datetime(metric_df.index, unit=&quot;s&quot;, utc=True)</span>
+<span class="c1"># ## Save the sanpshot of the data to ensure reproducibility</span>
+<span class="c1"># metric_df.to_pickle(&quot;../data/raw/ts.pkl&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;../data/raw/ts.pkl&quot;</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">metric_df</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;min&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualize time series&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Node memory active bytes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_3_0.png" src="../_images/ts-3-concepts_3_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="standard-time-series">
+<h3>Standard time series<a class="headerlink" href="#standard-time-series" title="Permalink to this headline">¶</a></h3>
+<p>Before defining statistical properties, let’s understand two standard time series: white noise and random walk. These time series are often used to understand and compare others.</p>
+<div class="section" id="white-noise">
+<h4><a class="reference external" href="https://en.wikipedia.org/wiki/White_noise">White noise</a><a class="headerlink" href="#white-noise" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>White noise has constant mean, constant variance, and no autocorrelation (no relationship between past and present of time series)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create a wn time series with mean, std, length same as our loaded data</span>
+<span class="n">wn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scale</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">wn</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualize white noise&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_6_0.png" src="../_images/ts-3-concepts_6_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="random-walk">
+<h4><a class="reference external" href="https://towardsdatascience.com/random-walks-with-python-8420981bc4bc">Random walk</a><a class="headerlink" href="#random-walk" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>A random walk is modelled using this equation: P<sub>t</sub> = P<sub>t-1</sub> + <span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t</sub> where <span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t</sub> is white noise.</p></li>
+<li><p>Random walks are not predictable</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Randomly choose from -1, 0, 1 for the next step</span>
+<span class="n">random_steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">rw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">random_steps</span><span class="p">])</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rw</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualize random walk&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_8_0.png" src="../_images/ts-3-concepts_8_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="stationarity">
+<h3><a class="reference external" href="https://towardsdatascience.com/stationarity-in-time-series-analysis-90c94f27322">Stationarity</a><a class="headerlink" href="#stationarity" title="Permalink to this headline">¶</a></h3>
+<p>Intuitively, a stationary time series does not change the way it changes. In other words, the statistical properties of the process generating the time series does not change over time. For real world problems, we use the weak form or covariance stationarity definition:</p>
+<ul class="simple">
+<li><p>Constant <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+<li><p>Constant <span class="math notranslate nohighlight">\(\sigma\)</span></p></li>
+<li><p>Cov (x<sub>n</sub>, x<sub>n+k</sub>) = Cov (x<sub>m</sub>, x<sub>m+k</sub>)</p></li>
+</ul>
+<p>Ideally we would want the time series to be stationary for modelling. In the real world it is rarely stationary. We shall now look at the Dickey Fuller Test which determines if a series is stationary or not.</p>
+</div>
+</div>
+<div class="section" id="dickey-fuller-test">
+<h2>Dickey Fuller Test<a class="headerlink" href="#dickey-fuller-test" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This test determines if the time series is stationary or not.</p></li>
+<li><p>If p value &gt; 0.05 then process is not stationary.</p></li>
+<li><p>If p &lt; 0.05, null hypothesis is rejected and the process is stationary.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dft</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;p value </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">dft</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Test statistic </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">dft</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Critical values </span><span class="si">{</span><span class="n">dft</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p value 0.0 
+ Test statistic -13.1299 
+ Critical values {&#39;1%&#39;: -3.431000972468946, &#39;5%&#39;: -2.8618276912593523, &#39;10%&#39;: -2.5669231329178066}
+</pre></div>
+</div>
+</div>
+</div>
+<p>For this series, the p-value is 0 which means that the null hypothesis can be rejected and the series is stationary. The test statistic of -15.6815 is less than 1% critical value (-3.4304) meaning that the chances of this result being a fluke is less than 1%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Examining white noise</span>
+<span class="n">dft</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">wn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;p value </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">dft</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Test statistic </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">dft</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Critical values </span><span class="si">{</span><span class="n">dft</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p value 0.0 
+ Test statistic -100.7762 
+ Critical values {&#39;1%&#39;: -3.4309989697613776, &#39;5%&#39;: -2.861826806277955, &#39;10%&#39;: -2.566922661841282}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Examining random walk</span>
+<span class="n">dft</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">rw</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;p value </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">dft</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Test statistic </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">dft</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Critical values </span><span class="si">{</span><span class="n">dft</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p value 0.1956 
+ Test statistic -2.2298 
+ Critical values {&#39;1%&#39;: -3.4309989697613776, &#39;5%&#39;: -2.861826806277955, &#39;10%&#39;: -2.566922661841282}
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see from the above, we know by definition that that white noise is stationary and the random walk is not. Since the results of the Dickey Fuller test verified our expected results, we know that we can at least have some confidence in this statistical test when it indicates to us that our real world time series data set is stationary.</p>
+<div class="section" id="seasonality">
+<h3>Seasonality<a class="headerlink" href="#seasonality" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>There are certain trends in some time series that appear cyclically.</p></li>
+<li><p>We can decompose the time series data into trend, seasonal, residual</p></li>
+<li><p>Trend: general pattern present in the time series</p></li>
+<li><p>Seasonal: cyclical effect in the time series</p></li>
+<li><p>Residual: Error of prediction</p></li>
+</ul>
+<div class="section" id="naive-decomposition">
+<h4>Naive Decomposition<a class="headerlink" href="#naive-decomposition" title="Permalink to this headline">¶</a></h4>
+<p>One way to decompose a time series in order to check for seasonality is through naive decomposition that assumes an additive or multiplicative nature between the three components: trend, seasonal, residual.</p>
+<p>Additive</p>
+<ul class="simple">
+<li><p>Observed = trend + seasonal + residual</p></li>
+</ul>
+<p>Multiplicative</p>
+<ul class="simple">
+<li><p>Observed = trend * seasonal * residual</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since this is minutely data, we have set freq=60*24 implying that we need to focus on one day</span>
+<span class="c1"># We need to manually gauge this parameter in order to come up with the right decomposition</span>
+<span class="c1"># We can set it to 60 to focus on hourly decomposition as well</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">sd_add</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;additive&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+<span class="n">sd_add</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>  <span class="c1"># Image manipulation doesn&#39;t work here.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_18_0.png" src="../_images/ts-3-concepts_18_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since this is minutely data, we have set freq=60*24 implying that we need to focus on one day</span>
+<span class="c1"># We need to manually gauge this parameter in order to come up with the right decomposition</span>
+<span class="c1"># We have can it to 60 to focus on hourly decomposition as well</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">sd_add</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;multiplicative&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+<span class="n">sd_add</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>  <span class="c1"># Image manipulation doesn&#39;t work here.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_19_0.png" src="../_images/ts-3-concepts_19_0.png" />
+</div>
+</div>
+<p>Both additive and multiplicative models give a similar output. There is a downward trend in memory usage at the begining of the week and it remains low throughout the week increasing slightly towards the end. The seasonal values show an oscillating behavior, however we can see that within a day, it starts high and reduces towards the end. The residuals however do not seem exactly random (like white noise) indicating that the decomposition is not perfect.
+For a better understanding, let’s try these methods on a synthetic seasonal time series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="c1">## Create a pattern</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">time</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">,</span> <span class="n">time</span> <span class="o">**</span> <span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="n">time</span> <span class="o">-</span> <span class="mi">9</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1">## Repeat it several times</span>
+<span class="n">seasonal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">values</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
+<span class="c1">## Add noise</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">250</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="c1">## Add upward trend</span>
+<span class="n">trend</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">250</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="c1">## Combine all</span>
+<span class="n">synthetic_time_series</span> <span class="o">=</span> <span class="n">seasonal</span> <span class="o">+</span> <span class="n">noise</span> <span class="o">+</span> <span class="n">trend</span>
+<span class="c1">## Visualize</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">synthetic_time_series</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Synthetic seasonal time series&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_21_0.png" src="../_images/ts-3-concepts_21_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For this data, we set freq=50 since we repeated a pattern 50 times</span>
+<span class="c1"># Again, we used additional information to gauge this parameter</span>
+<span class="n">sd_add</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">synthetic_time_series</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;additive&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">sd_add</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>  <span class="c1"># Image manipulation doesn&#39;t work here.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_22_0.png" src="../_images/ts-3-concepts_22_0.png" />
+</div>
+</div>
+<p>No surprises here, but we see that the time series being perfectly decomposed into the trend and the seasonal variations. The residuals look like white noise as well. We can use such decomposition for simpifying and understanding all time series data.</p>
+</div>
+</div>
+<div class="section" id="auto-correlation">
+<h3>Auto-correlation<a class="headerlink" href="#auto-correlation" title="Permalink to this headline">¶</a></h3>
+<p>Auto correlation refers to correlation of a time series with a lagged version of itself.</p>
+<div class="section" id="acf">
+<h4><a class="reference external" href="https://towardsdatascience.com/significance-of-acf-and-pacf-plots-in-time-series-analysis-2fa11a5d10a8">ACF</a><a class="headerlink" href="#acf" title="Permalink to this headline">¶</a></h4>
+<p>Auto correlation function for how the number of lags we are interested in.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">## We give zero=False since correlation of a time series with itself is always 1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_25_0.png" src="../_images/ts-3-concepts_25_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>X axis represents the number of lags.</p></li>
+<li><p>Y axis represents the correlation value of the time series with a lagged version of itself</p></li>
+<li><p>Blue area depicts significance. In this plot, all lines are higher than significance which means that all the autocorrelation coefficients are significant.</p></li>
+<li><p>Interpretation: There is time dependence in the data since we see high correlation. In other words, we can even use 50 points behind to predict what comes next.</p></li>
+<li><p>This curve is also indicative of some non-stationarity in the dataset. Although the dickey-fuller test shows stationarity, ACF plot with many significant coefficients may require integrations before modelling (explained in ARIMA section).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Let&#39;s examine auto correlation of white noise</span>
+<span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">wn</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_27_0.png" src="../_images/ts-3-concepts_27_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>We see that most coefficients are not significant</p></li>
+<li><p>Randomly, some of them cross the blue area</p></li>
+<li><p>Hence, white noise has no auto correlation or no time dependence</p></li>
+</ul>
+</div>
+<div class="section" id="pacf-partial-auto-correlation">
+<h4>PACF (Partial Auto correlation)<a class="headerlink" href="#pacf-partial-auto-correlation" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Accounts for direct effect of x<sub>lagged</sub> on x<sub>t</sub></p></li>
+<li><p>For example, ACF for a lag of 3, will also include effect of x<sub>t-3</sub> on x<sub>t-2</sub>, x<sub>t-2</sub> on x<sub>t-1</sub>, and x<sub>t-1</sub> on x<sub>t</sub></p></li>
+<li><p>PACF for a lag of 3, only accounts for effect of x<sub>t-3</sub> on x<sub>t</sub></p></li>
+<li><p>The first value is same for both as there are no indirect influences in the first computation.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_pacf</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;ols&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_30_0.png" src="../_images/ts-3-concepts_30_0.png" />
+</div>
+</div>
+<p>Great! now we have a basic understanding of statistical properties of the time series data. Next, we’ll look at how to model a time series data.</p>
+</div>
+</div>
+</div>
+<div class="section" id="modelling">
+<h2>Modelling<a class="headerlink" href="#modelling" title="Permalink to this headline">¶</a></h2>
+<p>Before we dive into various time series models, here are some general points to keep in mind:</p>
+<ul class="simple">
+<li><p>Start with a simple parsimonious model and add more parameters and complexity as required.</p></li>
+<li><p>If coefficients of added variables are significantly different from zero keep them otherwise prefer simpler models to favour generalizability.</p></li>
+<li><p>To see if we should select the more complex model, we can compare log likelihood, information criterion like AIC, and BIC.</p></li>
+<li><p>Residuals: If the model fits the data well then the residuals should resemble white noise (or in other words, there is no trend left to capture).</p></li>
+</ul>
+<div class="section" id="linear-regression-model">
+<h3>Linear Regression Model<a class="headerlink" href="#linear-regression-model" title="Permalink to this headline">¶</a></h3>
+<p>Linear regression is a linear model, a model that assumes a linear relationship between the input variables (x) and the single output variable (y). y can be calculated from a linear combination of the input variables (x). If we try to draw a relatonshop between these two variables, we get a straight line that can be mathematically expressed as :</p>
+<ul class="simple">
+<li><p>y = mx + b</p></li>
+</ul>
+<p>Where b is the intercept and m is the slope of the line.</p>
+<ul class="simple">
+<li><p>y<sub>t</sub> = β<sub>0</sub> + β<sub>1</sub>x<sub>t</sub> + ε<sub>t</sub></p></li>
+</ul>
+<p>The coefficients β<sub>0</sub> and β<sub>1</sub> denote the intercept and the slope of the line respectively. The intercept β<sub>0</sub> represents the predicted value of y when x=0. The slope β<sub>1</sub> represents the average predicted change in y resulting from a one unit increase in x.</p>
+<p>So basically, the linear regression algorithm gives us the most optimal value for the intercept and the slope in a two dimensional environment.  The x and y values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span> <span class="p">:]</span>
+<span class="n">train_time</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">))]</span>
+<span class="n">test_time</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">8065</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">))]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">LinearRegression_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+<span class="n">LinearRegression_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<span class="n">LinearRegression_train</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_time</span>
+<span class="n">LinearRegression_test</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">LinearRegression_train</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>value</th>
+      <th>time</th>
+    </tr>
+    <tr>
+      <th>timestamp</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-07 19:19:00+00:00</th>
+      <td>7.443729e+08</td>
+      <td>8060</td>
+    </tr>
+    <tr>
+      <th>2021-02-07 19:20:00+00:00</th>
+      <td>7.448098e+08</td>
+      <td>8061</td>
+    </tr>
+    <tr>
+      <th>2021-02-07 19:21:00+00:00</th>
+      <td>7.495154e+08</td>
+      <td>8062</td>
+    </tr>
+    <tr>
+      <th>2021-02-07 19:22:00+00:00</th>
+      <td>7.500192e+08</td>
+      <td>8063</td>
+    </tr>
+    <tr>
+      <th>2021-02-07 19:23:00+00:00</th>
+      <td>7.529506e+08</td>
+      <td>8064</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">LinearRegression_test</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>value</th>
+      <th>time</th>
+    </tr>
+    <tr>
+      <th>timestamp</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-02-07 19:24:00+00:00</th>
+      <td>7.529376e+08</td>
+      <td>8065</td>
+    </tr>
+    <tr>
+      <th>2021-02-07 19:25:00+00:00</th>
+      <td>7.605699e+08</td>
+      <td>8066</td>
+    </tr>
+    <tr>
+      <th>2021-02-07 19:26:00+00:00</th>
+      <td>7.616949e+08</td>
+      <td>8067</td>
+    </tr>
+    <tr>
+      <th>2021-02-07 19:27:00+00:00</th>
+      <td>7.628725e+08</td>
+      <td>8068</td>
+    </tr>
+    <tr>
+      <th>2021-02-07 19:28:00+00:00</th>
+      <td>7.714700e+08</td>
+      <td>8069</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">LinearRegression_train</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Train&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">LinearRegression_test</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_38_0.png" src="../_images/ts-3-concepts_38_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training the algorithm</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">LinearRegression_train</span><span class="p">[[</span><span class="s2">&quot;time&quot;</span><span class="p">]],</span> <span class="n">LinearRegression_train</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearRegression()
+</pre></div>
+</div>
+</div>
+</div>
+<p>As discussed previously, we saw that Linear Regression model looks for the best value for the intercept and result in a line that best fits the data. Let’s see how we can retrieve those parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Intercept</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intercept :&quot;</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+<span class="c1"># Coeffiecient of x : Slope</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficient of x :&quot;</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept : 857400029.6296086
+Coefficient of x : [-4126.27650078]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This means that for every one unit of change in time, the change in the value is about <code class="docutils literal notranslate"><span class="pre">-4126.27</span></code>. However, this information doesn’t help a lot in knowing how the time series data would change with time. This method can be mostly be useful in cases where the data is linear. In this scenario we have some trends and seasonality as well. We will now move towards Exponential Smoothing models to see how they are different and better than linear models.</p>
+</div>
+<div class="section" id="exponential-smoothing-model">
+<h3>Exponential Smoothing Model<a class="headerlink" href="#exponential-smoothing-model" title="Permalink to this headline">¶</a></h3>
+<p>Forecasts produced using exponential smoothing methods are weighted averages of past observations, with the weights decaying exponentially as the observations get older. In other words, the more recent the observation the higher the associated weight.</p>
+<div class="section" id="simple-exponential-smoothing">
+<h4>Simple Exponential Smoothing<a class="headerlink" href="#simple-exponential-smoothing" title="Permalink to this headline">¶</a></h4>
+<p>Simple exponential smoothing method is most suitable for forecasting data with no clear trend or seasonal pattern. It requires a single parameter, called alpha (α), also called the smoothing factor or smoothing coefficient.</p>
+<ul>
+<li><p>Alpha (<em>smoothing_level</em>) controls the rate at which the influence of the observations at prior time steps decay exponentially.</p></li>
+<li><p>Alpha is often set to a value between 0 and 1.</p></li>
+<li><p>Large values mean that the model pays attention mainly to the most recent past observations, whereas smaller values mean more of the history is taken into account when making a prediction.</p></li>
+<li><p>As we mentioned, that SES has only one component, let’s see how it is represented in mathematical form :</p>
+<ul class="simple">
+<li><p>Forecast : p<sub>t</sub> = l<sub>t</p></li>
+<li><p>Level : l<sub>t = α y<sub>t</sub>  +  (1-α)l<sub>t-1</p></li>
+</ul>
+<p>Where p is the forecast, l is the level and α is the smoothing factor.</p>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ses_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try autofit</span>
+<span class="n">ses_model</span> <span class="o">=</span> <span class="n">SimpleExpSmoothing</span><span class="p">(</span><span class="n">ses_train</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<span class="n">ses_model_autofit</span> <span class="o">=</span> <span class="n">ses_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">optimized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_brute</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ses_model_autofit</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>SimpleExpSmoothing Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>value</td>       <th>  No. Observations:  </th>          <td>8064</td>          
+</tr>
+<tr>
+  <th>Model:</th>            <td>SimpleExpSmoothing</td> <th>  SSE                </th> <td>2821028751038333952.000</td>
+</tr>
+<tr>
+  <th>Optimized:</th>               <td>True</td>        <th>  AIC                </th>       <td>270055.008</td>       
+</tr>
+<tr>
+  <th>Trend:</th>                   <td>None</td>        <th>  BIC                </th>       <td>270068.999</td>       
+</tr>
+<tr>
+  <th>Seasonal:</th>                <td>None</td>        <th>  AICC               </th>       <td>270055.013</td>       
+</tr>
+<tr>
+  <th>Seasonal Periods:</th>        <td>None</td>        <th>  Date:              </th>    <td>Tue, 20 Apr 2021</td>    
+</tr>
+<tr>
+  <th>Box-Cox:</th>                 <td>False</td>       <th>  Time:              </th>        <td>18:55:27</td>        
+</tr>
+<tr>
+  <th>Box-Cox Coeff.:</th>          <td>None</td>        <th>                     </th>            <td> </td>           
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+         <td></td>                 <th>coeff</th>                <th>code</th>               <th>optimized</th>     
+</tr>
+<tr>
+  <th>smoothing_level</th> <td>           0.9950000</td> <td>               alpha</td> <td>                True</td>
+</tr>
+<tr>
+  <th>initial_level</th>   <td>          7.1014e+08</td> <td>                 l.0</td> <td>                True</td>
+</tr>
+</table></div></div>
+</div>
+<p>The above model is a result of the autofit model by statsmodels. As mentioned above, the depends on one parameter alpha also known as the smoothing factor or smoothing coefficient. According to autofit, the best alpha for this data would be <code class="docutils literal notranslate"><span class="pre">0.995</span></code>. That means the model pays attention mainly to the most recent past observations.</p>
+<p><strong>Optimize Alpha</strong></p>
+<p>We could also try other values for alpha as follows and will chose the minimum AIC i.e. Akaike’s Information Criterion which is defined as :</p>
+<p><code class="docutils literal notranslate"><span class="pre">AIC</span> <span class="pre">=</span> <span class="pre">-2log(L)</span> <span class="pre">+</span> <span class="pre">2k</span></code></p>
+<p>where L is the likelihood of the model and k is the total number of parameters and initial states that have been estimated (including the residual variance).</p>
+<p>The measures on the training set (training sample) are not really suitable as basis for model selection. It is because in the training sample it is always possible to overfit, and the richer the model, the better the fit will be. Meanwhile, information criteria like AIC or BIC take this into account and penalize for the model complexity accordingly. Therefore, they generally are suitable for model selection. For this model let’s try to minimize the value of AIC in order to find the best model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try to optimize the coefficient by finding minimum AIC.</span>
+<span class="n">min_ses_aic</span> <span class="o">=</span> <span class="mi">99999999</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">ses_model_alpha</span> <span class="o">=</span> <span class="n">ses_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">smoothing_level</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">optimized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_brute</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="c1"># You can print to see all the AIC values</span>
+    <span class="c1"># print(&#39; SES {} - AIC {} &#39;.format(i,ses_model_alpha.aic))</span>
+    <span class="k">if</span> <span class="n">ses_model_alpha</span><span class="o">.</span><span class="n">aic</span> <span class="o">&lt;</span> <span class="n">min_ses_aic</span><span class="p">:</span>
+        <span class="n">min_ses_aic</span> <span class="o">=</span> <span class="n">ses_model_alpha</span><span class="o">.</span><span class="n">aic</span>
+        <span class="n">min_aic_ses_model</span> <span class="o">=</span> <span class="n">ses_model_alpha</span>
+        <span class="n">min_aic_alpha_ses</span> <span class="o">=</span> <span class="n">i</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best Alpha : &quot;</span><span class="p">,</span> <span class="n">min_aic_alpha_ses</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best Model : </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">min_aic_ses_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Alpha :  0.99
+Best Model : 
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>SimpleExpSmoothing Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>value</td>       <th>  No. Observations:  </th>          <td>8064</td>          
+</tr>
+<tr>
+  <th>Model:</th>            <td>SimpleExpSmoothing</td> <th>  SSE                </th> <td>2823356819433681408.000</td>
+</tr>
+<tr>
+  <th>Optimized:</th>               <td>False</td>       <th>  AIC                </th>       <td>270061.661</td>       
+</tr>
+<tr>
+  <th>Trend:</th>                   <td>None</td>        <th>  BIC                </th>       <td>270075.651</td>       
+</tr>
+<tr>
+  <th>Seasonal:</th>                <td>None</td>        <th>  AICC               </th>       <td>270061.666</td>       
+</tr>
+<tr>
+  <th>Seasonal Periods:</th>        <td>None</td>        <th>  Date:              </th>    <td>Tue, 20 Apr 2021</td>    
+</tr>
+<tr>
+  <th>Box-Cox:</th>                 <td>False</td>       <th>  Time:              </th>        <td>18:55:28</td>        
+</tr>
+<tr>
+  <th>Box-Cox Coeff.:</th>          <td>None</td>        <th>                     </th>            <td> </td>           
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+         <td></td>                 <th>coeff</th>                <th>code</th>               <th>optimized</th>     
+</tr>
+<tr>
+  <th>smoothing_level</th> <td>           0.9900000</td> <td>               alpha</td> <td>               False</td>
+</tr>
+<tr>
+  <th>initial_level</th>   <td>          7.1014e+08</td> <td>                 l.0</td> <td>               False</td>
+</tr>
+</table></div></div>
+</div>
+<p>The above implementation of Simple Exponential Smoothing allows us to compare the autofit and manual grid search for best alpha and best model. Both the alphas are pretty comparable and gives us the best model. However, this model performs better where there is no seasonality and trend. So we will move to Holt’s model that covers the <code class="docutils literal notranslate"><span class="pre">trend</span></code> in data but no seasonality.</p>
+</div>
+<div class="section" id="holt-s-double-exponential-smoothing-model">
+<h4>Holt’s Double Exponential Smoothing Model<a class="headerlink" href="#holt-s-double-exponential-smoothing-model" title="Permalink to this headline">¶</a></h4>
+<p>Holt’s Double Exponential Smoothing method is similar to Simple Exponential Smoothing. It calculates the level component to measure the level in the <a class="reference external" href="http://Forecast.In">Forecast.In</a> addition to the alpha parameter for controlling smoothing factor for the level, an additional smoothing factor is added to control the decay of the influence of the change in trend called beta (β).</p>
+<ul>
+<li><p>Forecast Equation : p<sub>t+h|t</sub> = l<sub>t</sub> + hb<sub>t</sub></p></li>
+<li><p>Level Equation : l<sub>t</sub> = αy<sub>t</sub> + (1-α)l<sub>t-1</sub></p></li>
+<li><p>Trend Equation : b<sub>t</sub> = β(l<sub>t</sub> - l<sub>t-1</sub>) + (1-β)b<sub>t-1</sub></p>
+<p>Where p is the forecast, l is the level, α is the smoothing factor and β is the smoothing slope.</p>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># since optimization is intensive, we are sampling for this method</span>
+<span class="n">ts_holt</span> <span class="o">=</span> <span class="n">metric_df</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;30min&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">ts_holt</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts_holt</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">ts_holt</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts_holt</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span> <span class="p">:]</span>
+<span class="n">des_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try out autofit model and see what alpha and beta values are.</span>
+<span class="n">des_model</span> <span class="o">=</span> <span class="n">Holt</span><span class="p">(</span><span class="n">des_train</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<span class="n">des_model_autofit</span> <span class="o">=</span> <span class="n">des_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">optimized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_brute</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">des_model_autofit</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>Holt Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>      <td>value</td>  <th>  No. Observations:  </th>           <td>268</td>          
+</tr>
+<tr>
+  <th>Model:</th>              <td>Holt</td>   <th>  SSE                </th> <td>1568472669608974080.000</td>
+</tr>
+<tr>
+  <th>Optimized:</th>          <td>True</td>   <th>  AIC                </th>        <td>9737.913</td>        
+</tr>
+<tr>
+  <th>Trend:</th>            <td>Additive</td> <th>  BIC                </th>        <td>9752.277</td>        
+</tr>
+<tr>
+  <th>Seasonal:</th>           <td>None</td>   <th>  AICC               </th>        <td>9738.235</td>        
+</tr>
+<tr>
+  <th>Seasonal Periods:</th>   <td>None</td>   <th>  Date:              </th>    <td>Tue, 20 Apr 2021</td>    
+</tr>
+<tr>
+  <th>Box-Cox:</th>            <td>False</td>  <th>  Time:              </th>        <td>18:55:28</td>        
+</tr>
+<tr>
+  <th>Box-Cox Coeff.:</th>     <td>None</td>   <th>                     </th>            <td> </td>           
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+         <td></td>                 <th>coeff</th>                <th>code</th>               <th>optimized</th>     
+</tr>
+<tr>
+  <th>smoothing_level</th> <td>           0.2878571</td> <td>               alpha</td> <td>                True</td>
+</tr>
+<tr>
+  <th>smoothing_trend</th> <td>           0.1877329</td> <td>                beta</td> <td>                True</td>
+</tr>
+<tr>
+  <th>initial_level</th>   <td>          7.1496e+08</td> <td>                 l.0</td> <td>                True</td>
+</tr>
+<tr>
+  <th>initial_trend</th>   <td>          5.1207e+07</td> <td>                 b.0</td> <td>                True</td>
+</tr>
+</table></div></div>
+</div>
+<p>Just like we did for Simple Exponential Smoothing model, for this model also let’s try to minimize the value of AIC in order to find the best model. The only difference here would be that we have two parameters : alpha and beta.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try to optimize the coefficient:</span>
+<span class="n">min_des_aic</span> <span class="o">=</span> <span class="mi">99999</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+        <span class="n">des_model_alpha_beta</span> <span class="o">=</span> <span class="n">des_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">smoothing_level</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+            <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">j</span><span class="p">,</span>
+            <span class="n">optimized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">use_brute</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># You can print to see all the AIC values</span>
+        <span class="c1"># print(&#39; DES {} - AIC {} &#39;.format(i,des_model_alpha_beta.aic))</span>
+        <span class="k">if</span> <span class="n">des_model_alpha_beta</span><span class="o">.</span><span class="n">aic</span> <span class="o">&lt;</span> <span class="n">min_des_aic</span><span class="p">:</span>
+            <span class="n">min_des_aic</span> <span class="o">=</span> <span class="n">des_model_alpha_beta</span><span class="o">.</span><span class="n">aic</span>
+            <span class="n">min_aic_des_model</span> <span class="o">=</span> <span class="n">des_model_alpha_beta</span>
+            <span class="n">min_aic_alpha_des</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="n">min_aic_beta_des</span> <span class="o">=</span> <span class="n">j</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best Alpha : &quot;</span><span class="p">,</span> <span class="n">min_aic_alpha_des</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best Beta : &quot;</span><span class="p">,</span> <span class="n">min_aic_beta_des</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best Model : </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">min_aic_des_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Alpha :  0.23
+Best Beta :  0.45
+Best Model : 
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Holt Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>      <td>value</td>  <th>  No. Observations:  </th>           <td>268</td>          
+</tr>
+<tr>
+  <th>Model:</th>              <td>Holt</td>   <th>  SSE                </th> <td>1567952299397379584.000</td>
+</tr>
+<tr>
+  <th>Optimized:</th>          <td>False</td>  <th>  AIC                </th>        <td>9737.824</td>        
+</tr>
+<tr>
+  <th>Trend:</th>            <td>Additive</td> <th>  BIC                </th>        <td>9752.188</td>        
+</tr>
+<tr>
+  <th>Seasonal:</th>           <td>None</td>   <th>  AICC               </th>        <td>9738.146</td>        
+</tr>
+<tr>
+  <th>Seasonal Periods:</th>   <td>None</td>   <th>  Date:              </th>    <td>Tue, 20 Apr 2021</td>    
+</tr>
+<tr>
+  <th>Box-Cox:</th>            <td>False</td>  <th>  Time:              </th>        <td>18:56:24</td>        
+</tr>
+<tr>
+  <th>Box-Cox Coeff.:</th>     <td>None</td>   <th>                     </th>            <td> </td>           
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+         <td></td>                 <th>coeff</th>                <th>code</th>               <th>optimized</th>     
+</tr>
+<tr>
+  <th>smoothing_level</th> <td>           0.2300000</td> <td>               alpha</td> <td>               False</td>
+</tr>
+<tr>
+  <th>smoothing_trend</th> <td>           0.4500000</td> <td>                beta</td> <td>               False</td>
+</tr>
+<tr>
+  <th>initial_level</th>   <td>          7.1496e+08</td> <td>                 l.0</td> <td>               False</td>
+</tr>
+<tr>
+  <th>initial_trend</th>   <td>          5.1207e+07</td> <td>                 b.0</td> <td>               False</td>
+</tr>
+</table></div></div>
+</div>
+<p>The above implementation of Simple Exponential Smoothing allows us to compare the autofit and manual grid search for best alpha, beta and best model. Both the alphas and betas are very different from each other. However, this model performs better where there is no seasonality. So we will move to other approaches that capture seasonality as well.</p>
+</div>
+</div>
+<div class="section" id="auto-regressive-ar-model">
+<h3>Auto regressive (AR) Model<a class="headerlink" href="#auto-regressive-ar-model" title="Permalink to this headline">¶</a></h3>
+<p>The next model we will explore is the AR model. Linear regression models the linear relationship of predictors whereas ARIMA models the linear relationship of past observation. This makes ARIMA naturally adaptive to new data [source]. The following equation shows AR(1) or auto regression model that learns from just one past observation.</p>
+<p>x<sub>t</sub> = c + <span class="math notranslate nohighlight">\(\phi\)</span>x<sub>t-1</sub> + <span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t</sub></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\phi\)</span> is a numerical constant from -1 to 1 (otherwise it’ll blow up)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t</sub> represents unpredictable shocks.</p></li>
+</ul>
+<p>In real life, looking at just 1 lag may not give reasonable results. To determine the optimal number of lags, we look at PACF plots and incrementally increase the number.
+If we have coefficients close to 1, that means they can be good candidates for the model.
+Note: AR model stationary process better. For non-stationary time series, it is often converted to stationary process first.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_pacf</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;ols&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_58_0.png" src="../_images/ts-3-concepts_58_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Let&#39;s start with a simple model with 1 lag</span>
+<span class="c1">## Since we have the highest PACF coefficient for lag 1</span>
+<span class="n">model_ar_1</span> <span class="o">=</span> <span class="n">ARMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">results_ar_1</span> <span class="o">=</span> <span class="n">model_ar_1</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_ar_1</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>ARMA Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>value</td>      <th>  No. Observations:  </th>     <td>10080</td>   
+</tr>
+<tr>
+  <th>Model:</th>            <td>ARMA(1, 0)</td>    <th>  Log Likelihood     </th>  <td>-182908.385</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>css-mle</td>     <th>  S.D. of innovations</th> <td>18376741.644</td>
+</tr>
+<tr>
+  <th>Date:</th>          <td>Tue, 20 Apr 2021</td> <th>  AIC                </th>  <td>365822.770</td> 
+</tr>
+<tr>
+  <th>Time:</th>              <td>18:56:26</td>     <th>  BIC                </th>  <td>365844.425</td> 
+</tr>
+<tr>
+  <th>Sample:</th>           <td>02-02-2021</td>    <th>  HQIC               </th>  <td>365830.097</td> 
+</tr>
+<tr>
+  <th></th>                 <td>- 02-09-2021</td>   <th>                     </th>       <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>       <td> 8.412e+08</td> <td> 5.83e+06</td> <td>  144.366</td> <td> 0.000</td> <td>  8.3e+08</td> <td> 8.53e+08</td>
+</tr>
+<tr>
+  <th>ar.L1.value</th> <td>    0.9687</td> <td>    0.002</td> <td>  391.053</td> <td> 0.000</td> <td>    0.964</td> <td>    0.974</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Roots</caption>
+<tr>
+    <td></td>   <th>            Real</th>  <th>         Imaginary</th> <th>         Modulus</th>  <th>        Frequency</th>
+</tr>
+<tr>
+  <th>AR.1</th> <td>           1.0323</td> <td>          +0.0000j</td> <td>           1.0323</td> <td>           0.0000</td>
+</tr>
+</table></div></div>
+</div>
+<p>Interpretation:</p>
+<ul class="simple">
+<li><p>ar.L1.value is the value of <span class="math notranslate nohighlight">\(\phi\)</span> in the AR(1) equation.</p></li>
+<li><p>const is the value of c in AR(1) equation.</p></li>
+<li><p>p &lt; 0.05 suggests that these coefficients are significant.</p></li>
+<li><p>Since the ar.L1.value is not 0, this variable adds to the model.</p></li>
+<li><p>Great! let’s increase the order and see if the more complex model is better.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_ar_2</span> <span class="o">=</span> <span class="n">ARMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">results_ar_2</span> <span class="o">=</span> <span class="n">model_ar_2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_ar_2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>ARMA Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>value</td>      <th>  No. Observations:  </th>     <td>10080</td>   
+</tr>
+<tr>
+  <th>Model:</th>            <td>ARMA(2, 0)</td>    <th>  Log Likelihood     </th>  <td>-182859.191</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>css-mle</td>     <th>  S.D. of innovations</th> <td>18287258.874</td>
+</tr>
+<tr>
+  <th>Date:</th>          <td>Tue, 20 Apr 2021</td> <th>  AIC                </th>  <td>365726.383</td> 
+</tr>
+<tr>
+  <th>Time:</th>              <td>18:56:28</td>     <th>  BIC                </th>  <td>365755.256</td> 
+</tr>
+<tr>
+  <th>Sample:</th>           <td>02-02-2021</td>    <th>  HQIC               </th>  <td>365736.152</td> 
+</tr>
+<tr>
+  <th></th>                 <td>- 02-09-2021</td>   <th>                     </th>       <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>       <td> 8.412e+08</td> <td> 5.27e+06</td> <td>  159.483</td> <td> 0.000</td> <td> 8.31e+08</td> <td> 8.52e+08</td>
+</tr>
+<tr>
+  <th>ar.L1.value</th> <td>    1.0641</td> <td>    0.010</td> <td>  107.367</td> <td> 0.000</td> <td>    1.045</td> <td>    1.084</td>
+</tr>
+<tr>
+  <th>ar.L2.value</th> <td>   -0.0986</td> <td>    0.010</td> <td>   -9.943</td> <td> 0.000</td> <td>   -0.118</td> <td>   -0.079</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Roots</caption>
+<tr>
+    <td></td>   <th>            Real</th>  <th>         Imaginary</th> <th>         Modulus</th>  <th>        Frequency</th>
+</tr>
+<tr>
+  <th>AR.1</th> <td>           1.0399</td> <td>          +0.0000j</td> <td>           1.0399</td> <td>           0.0000</td>
+</tr>
+<tr>
+  <th>AR.2</th> <td>           9.7543</td> <td>          +0.0000j</td> <td>           9.7543</td> <td>           0.0000</td>
+</tr>
+</table></div></div>
+</div>
+<p>Alright, we have a more complex model, but is it adding anything new?
+The log likelihood ratio (LLR) test determines if the new model adds value to the modelling significantly. It returns a p value, if p&lt;0.05 then the complex model is better.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># LLR Test</span>
+<span class="k">def</span> <span class="nf">llr_test</span><span class="p">(</span><span class="n">res_1</span><span class="p">,</span> <span class="n">res_2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span> <span class="o">=</span> <span class="n">res_1</span><span class="o">.</span><span class="n">llf</span><span class="p">,</span> <span class="n">res_2</span><span class="o">.</span><span class="n">llf</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">l2</span> <span class="o">-</span> <span class="n">l1</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;Insignificant&quot;</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mf">0.005</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;Significant&quot;</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">result</span>
+
+
+<span class="n">llr_test</span><span class="p">(</span><span class="n">results_ar_1</span><span class="p">,</span> <span class="n">results_ar_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, &#39;Significant&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>So the second model is significantly better than the first.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Let&#39;s automate this process to find the order</span>
+<span class="n">llr</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">ARMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">llr</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="n">results_prev</span> <span class="o">=</span> <span class="n">results</span>
+    <span class="n">p</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">ARMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">llr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">llr_test</span><span class="p">(</span><span class="n">results_prev</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">llr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 0.0
+3 0.004
+4 0.22
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above code suggests that going from order 3 to order 4 does not add any significant value in the model. We can also see that by looking at the summaries of the results.
+Side note: These are rules of thumb but as we see in the pacf plot, some higher lags than 3 are also significant, it could be that a higher lag model may fit the series better.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_ar_3</span> <span class="o">=</span> <span class="n">ARMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">results_ar_3</span> <span class="o">=</span> <span class="n">model_ar_3</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">model_ar_4</span> <span class="o">=</span> <span class="n">ARMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">results_ar_4</span> <span class="o">=</span> <span class="n">model_ar_4</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_ar_3</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>ARMA Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>value</td>      <th>  No. Observations:  </th>     <td>10080</td>   
+</tr>
+<tr>
+  <th>Model:</th>            <td>ARMA(3, 0)</td>    <th>  Log Likelihood     </th>  <td>-182855.084</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>css-mle</td>     <th>  S.D. of innovations</th> <td>18279805.659</td>
+</tr>
+<tr>
+  <th>Date:</th>          <td>Tue, 20 Apr 2021</td> <th>  AIC                </th>  <td>365720.167</td> 
+</tr>
+<tr>
+  <th>Time:</th>              <td>18:56:45</td>     <th>  BIC                </th>  <td>365756.259</td> 
+</tr>
+<tr>
+  <th>Sample:</th>           <td>02-02-2021</td>    <th>  HQIC               </th>  <td>365732.379</td> 
+</tr>
+<tr>
+  <th></th>                 <td>- 02-09-2021</td>   <th>                     </th>       <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>       <td> 8.412e+08</td> <td> 5.43e+06</td> <td>  154.966</td> <td> 0.000</td> <td> 8.31e+08</td> <td> 8.52e+08</td>
+</tr>
+<tr>
+  <th>ar.L1.value</th> <td>    1.0670</td> <td>    0.010</td> <td>  107.170</td> <td> 0.000</td> <td>    1.047</td> <td>    1.086</td>
+</tr>
+<tr>
+  <th>ar.L2.value</th> <td>   -0.1290</td> <td>    0.015</td> <td>   -8.889</td> <td> 0.000</td> <td>   -0.157</td> <td>   -0.101</td>
+</tr>
+<tr>
+  <th>ar.L3.value</th> <td>    0.0285</td> <td>    0.010</td> <td>    2.867</td> <td> 0.004</td> <td>    0.009</td> <td>    0.048</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Roots</caption>
+<tr>
+    <td></td>   <th>            Real</th>  <th>         Imaginary</th> <th>         Modulus</th>  <th>        Frequency</th>
+</tr>
+<tr>
+  <th>AR.1</th> <td>           1.0375</td> <td>          -0.0000j</td> <td>           1.0375</td> <td>          -0.0000</td>
+</tr>
+<tr>
+  <th>AR.2</th> <td>           1.7397</td> <td>          -5.5440j</td> <td>           5.8105</td> <td>          -0.2016</td>
+</tr>
+<tr>
+  <th>AR.3</th> <td>           1.7397</td> <td>          +5.5440j</td> <td>           5.8105</td> <td>           0.2016</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_ar_4</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>ARMA Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>value</td>      <th>  No. Observations:  </th>     <td>10080</td>   
+</tr>
+<tr>
+  <th>Model:</th>            <td>ARMA(4, 0)</td>    <th>  Log Likelihood     </th>  <td>-182854.332</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>css-mle</td>     <th>  S.D. of innovations</th> <td>18278441.806</td>
+</tr>
+<tr>
+  <th>Date:</th>          <td>Tue, 20 Apr 2021</td> <th>  AIC                </th>  <td>365720.663</td> 
+</tr>
+<tr>
+  <th>Time:</th>              <td>18:56:47</td>     <th>  BIC                </th>  <td>365763.973</td> 
+</tr>
+<tr>
+  <th>Sample:</th>           <td>02-02-2021</td>    <th>  HQIC               </th>  <td>365735.318</td> 
+</tr>
+<tr>
+  <th></th>                 <td>- 02-09-2021</td>   <th>                     </th>       <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>       <td> 8.412e+08</td> <td> 5.36e+06</td> <td>  156.885</td> <td> 0.000</td> <td> 8.31e+08</td> <td> 8.52e+08</td>
+</tr>
+<tr>
+  <th>ar.L1.value</th> <td>    1.0673</td> <td>    0.010</td> <td>  107.169</td> <td> 0.000</td> <td>    1.048</td> <td>    1.087</td>
+</tr>
+<tr>
+  <th>ar.L2.value</th> <td>   -0.1305</td> <td>    0.015</td> <td>   -8.964</td> <td> 0.000</td> <td>   -0.159</td> <td>   -0.102</td>
+</tr>
+<tr>
+  <th>ar.L3.value</th> <td>    0.0416</td> <td>    0.015</td> <td>    2.855</td> <td> 0.004</td> <td>    0.013</td> <td>    0.070</td>
+</tr>
+<tr>
+  <th>ar.L4.value</th> <td>   -0.0122</td> <td>    0.010</td> <td>   -1.226</td> <td> 0.220</td> <td>   -0.032</td> <td>    0.007</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Roots</caption>
+<tr>
+    <td></td>   <th>            Real</th>  <th>         Imaginary</th> <th>         Modulus</th>  <th>        Frequency</th>
+</tr>
+<tr>
+  <th>AR.1</th> <td>           1.0385</td> <td>          -0.0000j</td> <td>           1.0385</td> <td>          -0.0000</td>
+</tr>
+<tr>
+  <th>AR.2</th> <td>           4.4697</td> <td>          -0.0000j</td> <td>           4.4697</td> <td>          -0.0000</td>
+</tr>
+<tr>
+  <th>AR.3</th> <td>          -1.0523</td> <td>          -4.0655j</td> <td>           4.1995</td> <td>          -0.2903</td>
+</tr>
+<tr>
+  <th>AR.4</th> <td>          -1.0523</td> <td>          +4.0655j</td> <td>           4.1995</td> <td>           0.2903</td>
+</tr>
+</table></div></div>
+</div>
+<p>At the end the more complex model should have both insignificant <span class="math notranslate nohighlight">\(\phi\)</span> values and insignificant log value. When we reach that stage, in this case at the lag 3, we stop.</p>
+<p>Side note: If you want to compare different time series, make sure to normalize values. One way to do this is to divide the series by the first number.</p>
+<div class="section" id="analyzing-the-residuals">
+<h4>Analyzing the residuals<a class="headerlink" href="#analyzing-the-residuals" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>This is a very important step in analysing the model performance.</p></li>
+<li><p>Remember that residuals should be similar to white noise reflecting that there is no trend remaining to be captured.</p></li>
+<li><p>We will now plot the residuals, check for stationarity, and check ACF plots.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid</span> <span class="o">=</span> <span class="n">results_ar_3</span><span class="o">.</span><span class="n">resid</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Residuals&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualizing residuals&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_76_0.png" src="../_images/ts-3-concepts_76_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">resid</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">resid</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9857.757619109436 335785710794057.25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adfuller</span><span class="p">(</span><span class="n">resid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-20.71399135956376,
+ 0.0,
+ 21,
+ 10058,
+ {&#39;1%&#39;: -3.4310003250850523,
+  &#39;5%&#39;: -2.8618274051853487,
+  &#39;10%&#39;: -2.5669229806403036},
+ 364247.3069391926)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_79_0.png" src="../_images/ts-3-concepts_79_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="interpretation">
+<h4>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>The plot shows that the residuals look random but are not exactly like white noise.</p></li>
+<li><p>The Dickey Fuller test suggests that the residuals are stationary.</p></li>
+<li><p>The ACF plots show coefficients that are significant further indicating that the residuals are not perfectly white noise and there could be better predictors.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="moving-average-model">
+<h3>Moving average model<a class="headerlink" href="#moving-average-model" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Better suited if the data has unexpected shocks</p></li>
+<li><p>Accounts for the past residuals</p></li>
+<li><p>Absorbs shocks (accounts from past errors) and correct</p></li>
+</ul>
+<p>r<sub>t</sub> = c + <span class="math notranslate nohighlight">\(\theta\)</span><span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t-1</sub> + <span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t</sub></p>
+<ul class="simple">
+<li><p>For finding the optimal number of lags for this model, we rely more on ACF than PACF because it learns from residuals, so the direct effect of a past observation on the present day is not relevant.</p></li>
+<li><p>Mathematical fact: If MA coefficients are close to 1 then it is basically an approximation of AR model.</p></li>
+<li><p>Both AR, MA models are bad with non-stationary data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_82_0.png" src="../_images/ts-3-concepts_82_0.png" />
+</div>
+</div>
+<p>Most the coefficients in the lags are significant implying that MA(n+1) will always be better than MA(n). This type of data suggests that some type of a combination of AR and MA is required to correctly model the data. For reference, let’s train a MA model of order 1.</p>
+<div class="section" id="model-ma-1-arma-ts-order-0-1-p-q-where-p-is-ar-and-q-is-ma-param">
+<h4>model_ma_1 = ARMA(ts, order=(0, 1))  ## p, q where p is AR and q is MA param<a class="headerlink" href="#model-ma-1-arma-ts-order-0-1-p-q-where-p-is-ar-and-q-is-ma-param" title="Permalink to this headline">¶</a></h4>
+<p>model_ma_results_1 = ARMA(ts, order=(0, 1)).fit()
+model_ma_results_1.summary()</p>
+<p>The results show that the coefficient is significant.</p>
+</div>
+</div>
+</div>
+<div class="section" id="arma-ar-and-ma-models-together">
+<h2>ARMA (AR and MA models together)<a class="headerlink" href="#arma-ar-and-ma-models-together" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The ARMA model considers both lagged value and lagged errors.</p></li>
+<li><p>Following equation represents ARMA(1,1):</p></li>
+</ul>
+<p>r<sub>t</sub> = c + <span class="math notranslate nohighlight">\(\phi\)</span>r<sub>t-1</sub> + <span class="math notranslate nohighlight">\(\theta\)</span><span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t-1</sub> + <span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t</sub></p>
+<ul class="simple">
+<li><p>For ARMA model, we select complex model and move to simpler models.</p></li>
+<li><p>For determining p, q take hint from PACF and ACF respectively.</p></li>
+<li><p>The  coefficients of the complex model should be significantly better than 0 and the either the AIC should be lower or the LLR test should give significant p-values.</p></li>
+<li><p>LLR test only works for nested models (one model should have all the lag terms of the other). While comparing ARMA(1,3) and ARMA(3,1), we have to look at AIC. Lower values of AIC are prefered over higher values.</p></li>
+</ul>
+<p>We found 3 lags for AR component and MA can be anything.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">pq</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pq</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pq</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: (1, 2)
+Model: (1, 3)
+Model: (1, 4)
+Model: (2, 1)
+Model: (2, 2)
+Model: (2, 3)
+Model: (2, 4)
+Model: (3, 1)
+Model: (3, 2)
+Model: (3, 3)
+Model: (3, 4)
+Model: (4, 1)
+Model: (4, 2)
+Model: (4, 3)
+Model: (4, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="n">pq</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+        <span class="n">model_arma_results</span> <span class="o">=</span> <span class="n">ARMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">order</span><span class="p">,</span> <span class="n">model_arma_results</span><span class="o">.</span><span class="n">aic</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">order</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 1)
+(1, 2)
+(1, 3)
+(1, 4)
+(2, 1)
+(2, 2)
+(2, 2) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+(2, 3)
+(2, 3) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+(2, 4)
+(2, 4) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+(3, 1)
+(3, 2)
+(3, 3)
+(3, 4)
+(3, 4) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+(4, 1)
+(4, 2)
+(4, 3)
+(4, 4)
+(4, 4) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[(3, 3), 365487.8721028673],
+ [(4, 3), 365590.621612872],
+ [(2, 1), 365718.12121591234],
+ [(1, 2), 365718.9376581142],
+ [(3, 1), 365719.51921091694],
+ [(1, 3), 365720.09677661443],
+ [(1, 1), 365721.14203969185],
+ [(1, 4), 365721.4326000566],
+ [(4, 1), 365721.50651079626],
+ [(3, 2), 365721.5111232434],
+ [(4, 2), 365723.4880399195],
+ [(2, 2), inf],
+ [(2, 3), inf],
+ [(2, 4), inf],
+ [(3, 4), inf],
+ [(4, 4), inf]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_arma_43_results</span> <span class="o">=</span> <span class="n">ARMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model_arma_43_results</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>ARMA Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>value</td>      <th>  No. Observations:  </th>     <td>10080</td>   
+</tr>
+<tr>
+  <th>Model:</th>            <td>ARMA(4, 3)</td>    <th>  Log Likelihood     </th>  <td>-182786.311</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>css-mle</td>     <th>  S.D. of innovations</th> <td>18153981.781</td>
+</tr>
+<tr>
+  <th>Date:</th>          <td>Tue, 20 Apr 2021</td> <th>  AIC                </th>  <td>365590.622</td> 
+</tr>
+<tr>
+  <th>Time:</th>              <td>19:06:23</td>     <th>  BIC                </th>  <td>365655.586</td> 
+</tr>
+<tr>
+  <th>Sample:</th>           <td>02-02-2021</td>    <th>  HQIC               </th>  <td>365612.603</td> 
+</tr>
+<tr>
+  <th></th>                 <td>- 02-09-2021</td>   <th>                     </th>       <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>       <td> 8.412e+08</td> <td> 5.41e+06</td> <td>  155.360</td> <td> 0.000</td> <td> 8.31e+08</td> <td> 8.52e+08</td>
+</tr>
+<tr>
+  <th>ar.L1.value</th> <td>    0.8821</td> <td>    0.083</td> <td>   10.674</td> <td> 0.000</td> <td>    0.720</td> <td>    1.044</td>
+</tr>
+<tr>
+  <th>ar.L2.value</th> <td>   -0.7894</td> <td>    0.104</td> <td>   -7.591</td> <td> 0.000</td> <td>   -0.993</td> <td>   -0.586</td>
+</tr>
+<tr>
+  <th>ar.L3.value</th> <td>    0.4839</td> <td>    0.104</td> <td>    4.664</td> <td> 0.000</td> <td>    0.281</td> <td>    0.687</td>
+</tr>
+<tr>
+  <th>ar.L4.value</th> <td>    0.3399</td> <td>    0.078</td> <td>    4.337</td> <td> 0.000</td> <td>    0.186</td> <td>    0.493</td>
+</tr>
+<tr>
+  <th>ma.L1.value</th> <td>    0.1844</td> <td>    0.079</td> <td>    2.327</td> <td> 0.020</td> <td>    0.029</td> <td>    0.340</td>
+</tr>
+<tr>
+  <th>ma.L2.value</th> <td>    0.8717</td> <td>    0.022</td> <td>   40.397</td> <td> 0.000</td> <td>    0.829</td> <td>    0.914</td>
+</tr>
+<tr>
+  <th>ma.L3.value</th> <td>    0.4526</td> <td>    0.079</td> <td>    5.740</td> <td> 0.000</td> <td>    0.298</td> <td>    0.607</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Roots</caption>
+<tr>
+    <td></td>   <th>            Real</th>  <th>         Imaginary</th> <th>         Modulus</th>  <th>        Frequency</th>
+</tr>
+<tr>
+  <th>AR.1</th> <td>           1.0377</td> <td>          -0.0000j</td> <td>           1.0377</td> <td>          -0.0000</td>
+</tr>
+<tr>
+  <th>AR.2</th> <td>           0.1452</td> <td>          -1.0047j</td> <td>           1.0151</td> <td>          -0.2272</td>
+</tr>
+<tr>
+  <th>AR.3</th> <td>           0.1452</td> <td>          +1.0047j</td> <td>           1.0151</td> <td>           0.2272</td>
+</tr>
+<tr>
+  <th>AR.4</th> <td>          -2.7516</td> <td>          -0.0000j</td> <td>           2.7516</td> <td>          -0.5000</td>
+</tr>
+<tr>
+  <th>MA.1</th> <td>           0.1360</td> <td>          -0.9934j</td> <td>           1.0026</td> <td>          -0.2283</td>
+</tr>
+<tr>
+  <th>MA.2</th> <td>           0.1360</td> <td>          +0.9934j</td> <td>           1.0026</td> <td>           0.2283</td>
+</tr>
+<tr>
+  <th>MA.3</th> <td>          -2.1979</td> <td>          -0.0000j</td> <td>           2.1979</td> <td>          -0.5000</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_arma_33_results</span> <span class="o">=</span> <span class="n">ARMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model_arma_33_results</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>ARMA Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>value</td>      <th>  No. Observations:  </th>     <td>10080</td>   
+</tr>
+<tr>
+  <th>Model:</th>            <td>ARMA(3, 3)</td>    <th>  Log Likelihood     </th>  <td>-182735.936</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>css-mle</td>     <th>  S.D. of innovations</th> <td>18060470.382</td>
+</tr>
+<tr>
+  <th>Date:</th>          <td>Tue, 20 Apr 2021</td> <th>  AIC                </th>  <td>365487.872</td> 
+</tr>
+<tr>
+  <th>Time:</th>              <td>19:09:58</td>     <th>  BIC                </th>  <td>365545.619</td> 
+</tr>
+<tr>
+  <th>Sample:</th>           <td>02-02-2021</td>    <th>  HQIC               </th>  <td>365507.411</td> 
+</tr>
+<tr>
+  <th></th>                 <td>- 02-09-2021</td>   <th>                     </th>       <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>       <td> 8.412e+08</td> <td>  5.4e+06</td> <td>  155.763</td> <td> 0.000</td> <td> 8.31e+08</td> <td> 8.52e+08</td>
+</tr>
+<tr>
+  <th>ar.L1.value</th> <td>    0.3450</td> <td>    0.003</td> <td>  120.383</td> <td> 0.000</td> <td>    0.339</td> <td>    0.351</td>
+</tr>
+<tr>
+  <th>ar.L2.value</th> <td>   -0.4045</td> <td>    0.002</td> <td> -227.156</td> <td> 0.000</td> <td>   -0.408</td> <td>   -0.401</td>
+</tr>
+<tr>
+  <th>ar.L3.value</th> <td>    0.9630</td> <td>    0.003</td> <td>  336.179</td> <td> 0.000</td> <td>    0.957</td> <td>    0.969</td>
+</tr>
+<tr>
+  <th>ma.L1.value</th> <td>    0.7292</td> <td>    0.010</td> <td>   70.724</td> <td> 0.000</td> <td>    0.709</td> <td>    0.749</td>
+</tr>
+<tr>
+  <th>ma.L2.value</th> <td>    1.0668</td> <td>    0.006</td> <td>  165.921</td> <td> 0.000</td> <td>    1.054</td> <td>    1.079</td>
+</tr>
+<tr>
+  <th>ma.L3.value</th> <td>    0.1088</td> <td>    0.010</td> <td>   10.542</td> <td> 0.000</td> <td>    0.089</td> <td>    0.129</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Roots</caption>
+<tr>
+    <td></td>   <th>            Real</th>  <th>         Imaginary</th> <th>         Modulus</th>  <th>        Frequency</th>
+</tr>
+<tr>
+  <th>AR.1</th> <td>          -0.3091</td> <td>          -0.9511j</td> <td>           1.0001</td> <td>          -0.3000</td>
+</tr>
+<tr>
+  <th>AR.2</th> <td>          -0.3091</td> <td>          +0.9511j</td> <td>           1.0001</td> <td>           0.3000</td>
+</tr>
+<tr>
+  <th>AR.3</th> <td>           1.0383</td> <td>          -0.0000j</td> <td>           1.0383</td> <td>          -0.0000</td>
+</tr>
+<tr>
+  <th>MA.1</th> <td>          -0.3104</td> <td>          -0.9510j</td> <td>           1.0004</td> <td>          -0.3002</td>
+</tr>
+<tr>
+  <th>MA.2</th> <td>          -0.3104</td> <td>          +0.9510j</td> <td>           1.0004</td> <td>           0.3002</td>
+</tr>
+<tr>
+  <th>MA.3</th> <td>          -9.1869</td> <td>          -0.0000j</td> <td>           9.1869</td> <td>          -0.5000</td>
+</tr>
+</table></div></div>
+</div>
+<p>ARMA(4,3) and ARMA(3,3) have low AIC, with all significant coefficients. Both of these models are good candidates for fitting the series.</p>
+<div class="section" id="id1">
+<h3>Analyzing the residuals<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_43</span> <span class="o">=</span> <span class="n">model_arma_43_results</span><span class="o">.</span><span class="n">resid</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_43</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Residuals&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualizing residuals&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Visualizing residuals&#39;)
+</pre></div>
+</div>
+<img alt="../_images/ts-3-concepts_95_1.png" src="../_images/ts-3-concepts_95_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adfuller</span><span class="p">(</span><span class="n">resid_43</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-17.905801779444907,
+ 2.9419099978191365e-30,
+ 32,
+ 10047,
+ {&#39;1%&#39;: -3.4310010372782322,
+  &#39;5%&#39;: -2.8618277198980784,
+  &#39;10%&#39;: -2.5669231481622323},
+ 364128.5002131127)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">resid_43</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_97_0.png" src="../_images/ts-3-concepts_97_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>This plot has are several significant values in the PACF.</p></li>
+<li><p>We can train higher order ARMA models but usually we have to go for ARIMA models.</p></li>
+</ul>
+</div>
+<div class="section" id="arima-models">
+<h3><a class="reference external" href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average">ARIMA</a> models<a class="headerlink" href="#arima-models" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Auto-regressive integrated moving average model.</p></li>
+<li><p>Since ARMA models do not work well with non-stationary data, we introduce integrations to make the data the stationary.</p></li>
+<li><p>The model builds on the difference between the time periods (integerated values) instead of the values itself.</p></li>
+<li><p>For example, converting prices to returns in stock market data would be similar to 1 degree of integration.</p></li>
+<li><p>Intuitively, modelling returns instead of prices may be better since returns may resemble stationary data.</p></li>
+<li><p>ARIMA has p, d, q hyperparameters.</p></li>
+<li><p>d -&gt; number of degree of changes to ensure stationarity.</p></li>
+<li><p>One way of finding d is to compute delta of the data unitll stationarity is found.</p></li>
+<li><p>ARIMA method uses AIC criteria to compare models with different orders.</p></li>
+<li><p>The following equation represents ARIMA(1,1,1).</p></li>
+<li><p>Start from a simple model and increase orders by looking at residuals.</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(\Delta\)</span>P<sub>t</sub> = c + <span class="math notranslate nohighlight">\(\phi\)</span><span class="math notranslate nohighlight">\(\Delta\)</span>P<sub>t-1</sub> + <span class="math notranslate nohighlight">\(\theta\)</span><span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t-1</sub> + <span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t</sub></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arima_111</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">arima_111</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_101_0.png" src="../_images/ts-3-concepts_101_0.png" />
+</div>
+</div>
+<p>We see that the third lag is significant. We can try all models from ARIMA(0,0,0) to ARIMA(3,1,3).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">pdq</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">q</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pdq</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pdq</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="n">pdq</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+        <span class="n">model_arima_results</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">order</span><span class="p">,</span> <span class="n">model_arima_results</span><span class="o">.</span><span class="n">aic</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">order</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: (0, 0, 1)
+Model: (0, 0, 2)
+Model: (0, 0, 3)
+Model: (0, 1, 0)
+Model: (0, 1, 1)
+Model: (0, 1, 2)
+Model: (0, 1, 3)
+Model: (1, 0, 0)
+Model: (1, 0, 1)
+Model: (1, 0, 2)
+Model: (1, 0, 3)
+Model: (1, 1, 0)
+Model: (1, 1, 1)
+Model: (1, 1, 2)
+Model: (1, 1, 3)
+Model: (2, 0, 0)
+Model: (2, 0, 1)
+Model: (2, 0, 2)
+Model: (2, 0, 3)
+Model: (2, 1, 0)
+Model: (2, 1, 1)
+Model: (2, 1, 2)
+Model: (2, 1, 3)
+Model: (3, 0, 0)
+Model: (3, 0, 1)
+Model: (3, 0, 2)
+Model: (3, 0, 3)
+Model: (3, 1, 0)
+Model: (3, 1, 1)
+Model: (3, 1, 2)
+Model: (3, 1, 3)
+(0, 0, 0)
+(0, 0, 1)
+(0, 0, 2)
+(0, 0, 2) Error The computed initial MA coefficients are not invertible
+You should induce invertibility, choose a different model order, or you can
+pass your own start_params.
+(0, 0, 3)
+(0, 0, 3) Error The computed initial MA coefficients are not invertible
+You should induce invertibility, choose a different model order, or you can
+pass your own start_params.
+(0, 1, 0)
+(0, 1, 1)
+(0, 1, 2)
+(0, 1, 3)
+(1, 0, 0)
+(1, 0, 1)
+(1, 0, 2)
+(1, 0, 3)
+(1, 1, 0)
+(1, 1, 1)
+(1, 1, 2)
+(1, 1, 3)
+(1, 1, 3) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+(2, 0, 0)
+(2, 0, 1)
+(2, 0, 2)
+(2, 0, 2) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+(2, 0, 3)
+(2, 0, 3) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+(2, 1, 0)
+(2, 1, 1)
+(2, 1, 2)
+(2, 1, 2) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+(2, 1, 3)
+(2, 1, 3) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+(3, 0, 0)
+(3, 0, 1)
+(3, 0, 2)
+(3, 0, 3)
+(3, 1, 0)
+(3, 1, 1)
+(3, 1, 2)
+(3, 1, 2) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+(3, 1, 3)
+(3, 1, 3) Error The computed initial AR coefficients are not stationary
+You should induce stationarity, choose a different model order, or you can
+pass your own start_params.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[(3, 0, 3), 365487.8721028673],
+ [(3, 1, 1), 365691.8784901391],
+ [(1, 1, 2), 365691.92489760055],
+ [(2, 1, 1), 365696.89234631776],
+ [(2, 0, 1), 365718.12121591234],
+ [(1, 0, 2), 365718.9376581142],
+ [(3, 0, 1), 365719.51921091694],
+ [(1, 0, 3), 365720.09677661443],
+ [(3, 0, 0), 365720.1672000777],
+ [(1, 0, 1), 365721.14203969185],
+ [(3, 0, 2), 365721.5111232434],
+ [(2, 0, 0), 365726.38260047237],
+ [(1, 0, 0), 365822.7701546097],
+ [(2, 1, 0), 365854.88895507844],
+ [(0, 1, 2), 365854.9773183209],
+ [(0, 1, 3), 365856.0842035335],
+ [(3, 1, 0), 365856.5834094851],
+ [(1, 1, 1), 365857.4704805023],
+ [(0, 1, 1), 365868.8083093382],
+ [(1, 1, 0), 365875.05135895085],
+ [(0, 1, 0), 365939.7623796054],
+ [(0, 0, 1), 382895.5433298524],
+ [(0, 0, 0), 393845.016979624],
+ [(0, 0, 2), inf],
+ [(0, 0, 3), inf],
+ [(1, 1, 3), inf],
+ [(2, 0, 2), inf],
+ [(2, 0, 3), inf],
+ [(2, 1, 2), inf],
+ [(2, 1, 3), inf],
+ [(3, 1, 2), inf],
+ [(3, 1, 3), inf]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ARIMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>ARMA Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>value</td>      <th>  No. Observations:  </th>     <td>10080</td>   
+</tr>
+<tr>
+  <th>Model:</th>            <td>ARMA(3, 3)</td>    <th>  Log Likelihood     </th>  <td>-182735.936</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>css-mle</td>     <th>  S.D. of innovations</th> <td>18060470.382</td>
+</tr>
+<tr>
+  <th>Date:</th>          <td>Tue, 20 Apr 2021</td> <th>  AIC                </th>  <td>365487.872</td> 
+</tr>
+<tr>
+  <th>Time:</th>              <td>19:20:38</td>     <th>  BIC                </th>  <td>365545.619</td> 
+</tr>
+<tr>
+  <th>Sample:</th>           <td>02-02-2021</td>    <th>  HQIC               </th>  <td>365507.411</td> 
+</tr>
+<tr>
+  <th></th>                 <td>- 02-09-2021</td>   <th>                     </th>       <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>       <td> 8.412e+08</td> <td>  5.4e+06</td> <td>  155.763</td> <td> 0.000</td> <td> 8.31e+08</td> <td> 8.52e+08</td>
+</tr>
+<tr>
+  <th>ar.L1.value</th> <td>    0.3450</td> <td>    0.003</td> <td>  120.383</td> <td> 0.000</td> <td>    0.339</td> <td>    0.351</td>
+</tr>
+<tr>
+  <th>ar.L2.value</th> <td>   -0.4045</td> <td>    0.002</td> <td> -227.156</td> <td> 0.000</td> <td>   -0.408</td> <td>   -0.401</td>
+</tr>
+<tr>
+  <th>ar.L3.value</th> <td>    0.9630</td> <td>    0.003</td> <td>  336.179</td> <td> 0.000</td> <td>    0.957</td> <td>    0.969</td>
+</tr>
+<tr>
+  <th>ma.L1.value</th> <td>    0.7292</td> <td>    0.010</td> <td>   70.724</td> <td> 0.000</td> <td>    0.709</td> <td>    0.749</td>
+</tr>
+<tr>
+  <th>ma.L2.value</th> <td>    1.0668</td> <td>    0.006</td> <td>  165.921</td> <td> 0.000</td> <td>    1.054</td> <td>    1.079</td>
+</tr>
+<tr>
+  <th>ma.L3.value</th> <td>    0.1088</td> <td>    0.010</td> <td>   10.542</td> <td> 0.000</td> <td>    0.089</td> <td>    0.129</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Roots</caption>
+<tr>
+    <td></td>   <th>            Real</th>  <th>         Imaginary</th> <th>         Modulus</th>  <th>        Frequency</th>
+</tr>
+<tr>
+  <th>AR.1</th> <td>          -0.3091</td> <td>          -0.9511j</td> <td>           1.0001</td> <td>          -0.3000</td>
+</tr>
+<tr>
+  <th>AR.2</th> <td>          -0.3091</td> <td>          +0.9511j</td> <td>           1.0001</td> <td>           0.3000</td>
+</tr>
+<tr>
+  <th>AR.3</th> <td>           1.0383</td> <td>          -0.0000j</td> <td>           1.0383</td> <td>          -0.0000</td>
+</tr>
+<tr>
+  <th>MA.1</th> <td>          -0.3104</td> <td>          -0.9510j</td> <td>           1.0004</td> <td>          -0.3002</td>
+</tr>
+<tr>
+  <th>MA.2</th> <td>          -0.3104</td> <td>          +0.9510j</td> <td>           1.0004</td> <td>           0.3002</td>
+</tr>
+<tr>
+  <th>MA.3</th> <td>          -9.1869</td> <td>          -0.0000j</td> <td>           9.1869</td> <td>          -0.5000</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">ARIMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_106_0.png" src="../_images/ts-3-concepts_106_0.png" />
+</div>
+</div>
+<p>Great, we see that the first 4 coefficients are now not significant. At this point, as an additional exercise, we could try models with lag 5,6, and 7 as well to further improve performance.
+Next, we are going to look at how to select the value for “d”, or the number of integrations required for modelling the data. Remember that integrations are done to introduce stationarity and should be avoided if the data is already stationary. In this case, the adfuller test says that the data is stationary but ACF plot shows many significant correlations. Hence we try d as 1. Let’s manually compute 1 degree of integration and check stationarity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adfuller</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-19.127626021632747,
+ 0.0,
+ 39,
+ 10039,
+ {&#39;1%&#39;: -3.431001556217458,
+  &#39;5%&#39;: -2.861827949213313,
+  &#39;10%&#39;: -2.5669232702269893},
+ 364359.1091279416)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_109_0.png" src="../_images/ts-3-concepts_109_0.png" />
+</div>
+</div>
+<p>Cool, the ACF plot has less significant correlations and the adfuller test also indicates that after one integration the data is stationarity.
+For exercise, and a rigorous search for the best model, we could check for models with d=2 as well. However, we prefer simpler models over complex models if the improvements are not significant. Let’s fit ARIMA(3,1,1) and evaluate the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ARIMA_311</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">ARIMA_311</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>ARIMA Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>      <td>D.value</td>     <th>  No. Observations:  </th>     <td>10079</td>   
+</tr>
+<tr>
+  <th>Model:</th>          <td>ARIMA(3, 1, 1)</td>  <th>  Log Likelihood     </th>  <td>-182839.939</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>css-mle</td>     <th>  S.D. of innovations</th> <td>18286554.066</td>
+</tr>
+<tr>
+  <th>Date:</th>          <td>Tue, 20 Apr 2021</td> <th>  AIC                </th>  <td>365691.878</td> 
+</tr>
+<tr>
+  <th>Time:</th>              <td>19:24:48</td>     <th>  BIC                </th>  <td>365735.188</td> 
+</tr>
+<tr>
+  <th>Sample:</th>           <td>02-02-2021</td>    <th>  HQIC               </th>  <td>365706.533</td> 
+</tr>
+<tr>
+  <th></th>                 <td>- 02-09-2021</td>   <th>                     </th>       <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+        <td></td>           <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>         <td> 2.508e+04</td> <td> 2.57e+04</td> <td>    0.975</td> <td> 0.329</td> <td>-2.53e+04</td> <td> 7.55e+04</td>
+</tr>
+<tr>
+  <th>ar.L1.D.value</th> <td>    1.0645</td> <td>    0.010</td> <td>  105.994</td> <td> 0.000</td> <td>    1.045</td> <td>    1.084</td>
+</tr>
+<tr>
+  <th>ar.L2.D.value</th> <td>   -0.1286</td> <td>    0.014</td> <td>   -8.874</td> <td> 0.000</td> <td>   -0.157</td> <td>   -0.100</td>
+</tr>
+<tr>
+  <th>ar.L3.D.value</th> <td>    0.0265</td> <td>    0.010</td> <td>    2.644</td> <td> 0.008</td> <td>    0.007</td> <td>    0.046</td>
+</tr>
+<tr>
+  <th>ma.L1.D.value</th> <td>   -0.9969</td> <td>    0.002</td> <td> -616.984</td> <td> 0.000</td> <td>   -1.000</td> <td>   -0.994</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Roots</caption>
+<tr>
+    <td></td>   <th>            Real</th>  <th>         Imaginary</th> <th>         Modulus</th>  <th>        Frequency</th>
+</tr>
+<tr>
+  <th>AR.1</th> <td>           1.0425</td> <td>          -0.0000j</td> <td>           1.0425</td> <td>          -0.0000</td>
+</tr>
+<tr>
+  <th>AR.2</th> <td>           1.9075</td> <td>          -5.7095j</td> <td>           6.0197</td> <td>          -0.1987</td>
+</tr>
+<tr>
+  <th>AR.3</th> <td>           1.9075</td> <td>          +5.7095j</td> <td>           6.0197</td> <td>           0.1987</td>
+</tr>
+<tr>
+  <th>MA.1</th> <td>           1.0031</td> <td>          +0.0000j</td> <td>           1.0031</td> <td>           0.0000</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">ARIMA_311</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_112_0.png" src="../_images/ts-3-concepts_112_0.png" />
+</div>
+</div>
+<p>Cool, we see 9 insignificant coefficients indicating that this model is a good choice.</p>
+</div>
+</div>
+<div class="section" id="arimax-exogenous-factors">
+<h2>ARIMAX (Exogenous factors)<a class="headerlink" href="#arimax-exogenous-factors" title="Permalink to this headline">¶</a></h2>
+<p>In addition to past observations, sometimes external factors also affect the future value of a time series</p>
+<p><span class="math notranslate nohighlight">\(\Delta\)</span>P<sub>t</sub> = c + <span class="math notranslate nohighlight">\(\beta\)</span>X + <span class="math notranslate nohighlight">\(\phi\)</span><span class="math notranslate nohighlight">\(\Delta\)</span>P<sub>t-1</sub> + <span class="math notranslate nohighlight">\(\theta\)</span><span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t-1</sub> + <span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t</sub></p>
+<ul class="simple">
+<li><p>X can be anything (data should be available for each period).</p></li>
+<li><p>E.g. S&amp;P prices for predicting a particular stock price.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> is a fitted coefficient.</p></li>
+</ul>
+</div>
+<div class="section" id="sarimax-seasonality">
+<h2>SARIMAX (Seasonality)<a class="headerlink" href="#sarimax-seasonality" title="Permalink to this headline">¶</a></h2>
+<p>Some time series have a seasonal aspect to them. For example, consider the number of views for a christmas song every month. Every year in December we can expect a spike in the series.</p>
+<ul class="simple">
+<li><p>SARIMAX model includes a lag term for the last period.</p></li>
+<li><p>Hyper parameters of SARIMAX: (p,d,q)(P,D,Q,s).</p></li>
+<li><p>(p,d,q) is the ARIMA order.</p></li>
+<li><p>‘s’ signifies how far behind do we observe the seasonal affect; s=1 means no seasonality.</p></li>
+<li><p>In our number of songs example, the value of s will be 12.</p></li>
+<li><p>P, Q specifies how many seasonal AR and MA terms we will have so for s=12, P=2, Q=1, the equation will have y<sub>t-12</sub>,  y<sub>t-24</sub>, and <span class="math notranslate nohighlight">\(\epsilon\)</span><sub>t-12</sub></p></li>
+<li><p>D specifies seasonal integrations.</p></li>
+<li><p>The total number of coefficients for the model will be: P + Q + p + q coeffs.</p></li>
+<li><p>In our current example we don’t see any seasonality but let’s train a SARIMAX model to understand how it works.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_sarimax</span> <span class="o">=</span> <span class="n">SARIMAX</span><span class="p">(</span>
+    <span class="n">ts</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="n">wn</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">seasonal_order</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_sarimax</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>SARIMAX Results</caption>
+<tr>
+  <th>Dep. Variable:</th>               <td>value</td>             <th>  No. Observations:  </th>    <td>10080</td>   
+</tr>
+<tr>
+  <th>Model:</th>           <td>SARIMAX(3, 1, 1)x(2, 0, 1, 5)</td> <th>  Log Likelihood     </th> <td>-182922.952</td>
+</tr>
+<tr>
+  <th>Date:</th>                  <td>Tue, 20 Apr 2021</td>        <th>  AIC                </th> <td>365863.904</td> 
+</tr>
+<tr>
+  <th>Time:</th>                      <td>19:25:19</td>            <th>  BIC                </th> <td>365928.868</td> 
+</tr>
+<tr>
+  <th>Sample:</th>                   <td>02-02-2021</td>           <th>  HQIC               </th> <td>365885.886</td> 
+</tr>
+<tr>
+  <th></th>                         <td>- 02-09-2021</td>          <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>              <td>opg</td>              <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>        <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>x1</th>       <td>    0.0023</td> <td>    0.002</td> <td>    1.294</td> <td> 0.196</td> <td>   -0.001</td> <td>    0.006</td>
+</tr>
+<tr>
+  <th>ar.L1</th>    <td>    0.0336</td> <td>    6.921</td> <td>    0.005</td> <td> 0.996</td> <td>  -13.532</td> <td>   13.599</td>
+</tr>
+<tr>
+  <th>ar.L2</th>    <td>   -0.0351</td> <td>    0.489</td> <td>   -0.072</td> <td> 0.943</td> <td>   -0.993</td> <td>    0.922</td>
+</tr>
+<tr>
+  <th>ar.L3</th>    <td>   -0.0049</td> <td>    0.271</td> <td>   -0.018</td> <td> 0.986</td> <td>   -0.536</td> <td>    0.526</td>
+</tr>
+<tr>
+  <th>ma.L1</th>    <td>    0.0369</td> <td>    6.921</td> <td>    0.005</td> <td> 0.996</td> <td>  -13.528</td> <td>   13.601</td>
+</tr>
+<tr>
+  <th>ar.S.L5</th>  <td>    0.1100</td> <td>    0.634</td> <td>    0.174</td> <td> 0.862</td> <td>   -1.132</td> <td>    1.352</td>
+</tr>
+<tr>
+  <th>ar.S.L10</th> <td>    0.0393</td> <td>    0.014</td> <td>    2.828</td> <td> 0.005</td> <td>    0.012</td> <td>    0.067</td>
+</tr>
+<tr>
+  <th>ma.S.L5</th>  <td>   -0.1180</td> <td>    0.637</td> <td>   -0.185</td> <td> 0.853</td> <td>   -1.366</td> <td>    1.130</td>
+</tr>
+<tr>
+  <th>sigma2</th>   <td>   3.4e+14</td> <td> 4.69e-11</td> <td> 7.26e+24</td> <td> 0.000</td> <td>  3.4e+14</td> <td>  3.4e+14</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Ljung-Box (L1) (Q):</th>     <td>1.92</td> <th>  Jarque-Bera (JB):  </th> <td>4208230.52</td>
+</tr>
+<tr>
+  <th>Prob(Q):</th>                <td>0.17</td> <th>  Prob(JB):          </th>    <td>0.00</td>   
+</tr>
+<tr>
+  <th>Heteroskedasticity (H):</th> <td>0.90</td> <th>  Skew:              </th>    <td>-9.25</td>  
+</tr>
+<tr>
+  <th>Prob(H) (two-sided):</th>    <td>0.00</td> <th>  Kurtosis:          </th>   <td>101.38</td>  
+</tr>
+</table><br/><br/>Warnings:<br/>[1] Covariance matrix calculated using the outer product of gradients (complex-step).<br/>[2] Covariance matrix is singular or near-singular, with condition number 4.51e+38. Standard errors may be unstable.</div></div>
+</div>
+</div>
+<div class="section" id="automated">
+<h2>Automated<a class="headerlink" href="#automated" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>In the final section of this notebook, we show the use of auto_arima function of <a class="reference external" href="https://alkaline-ml.com/pmdarima/modules/classes.html">pmdarima</a> library that automatically finds hyperparameters for a SARIMAX model.</p></li>
+<li><p>However, we need to proceed with caution and do our due diligence before selecting a new model as automated values may choose a complicated model but in real life we may prefer a simpler one.</p></li>
+<li><p>The function does dickey fuller test to find d; and uses one information criteria to select between models (default being “aic”).</p></li>
+<li><p>The function does not look at whether all coefficients are significant or not, we have to consider that on our own.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Calling auto arima with default settings</span>
+<span class="n">auto_arima_model</span> <span class="o">=</span> <span class="n">auto_arima</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">auto_arima_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>SARIMAX Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>y</td>        <th>  No. Observations:  </th>    <td>10080</td>   
+</tr>
+<tr>
+  <th>Model:</th>           <td>SARIMAX(2, 1, 3)</td> <th>  Log Likelihood     </th> <td>-182891.981</td>
+</tr>
+<tr>
+  <th>Date:</th>            <td>Tue, 20 Apr 2021</td> <th>  AIC                </th> <td>365797.962</td> 
+</tr>
+<tr>
+  <th>Time:</th>                <td>19:35:47</td>     <th>  BIC                </th> <td>365848.489</td> 
+</tr>
+<tr>
+  <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>365815.058</td> 
+</tr>
+<tr>
+  <th></th>                     <td> - 10080</td>     <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>        <td>opg</td>       <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>intercept</th> <td> 2.587e+04</td> <td> 1.57e+04</td> <td>    1.645</td> <td> 0.100</td> <td>-4945.652</td> <td> 5.67e+04</td>
+</tr>
+<tr>
+  <th>ar.L1</th>     <td>    0.0825</td> <td>    0.428</td> <td>    0.193</td> <td> 0.847</td> <td>   -0.756</td> <td>    0.921</td>
+</tr>
+<tr>
+  <th>ar.L2</th>     <td>    0.8286</td> <td>    0.401</td> <td>    2.065</td> <td> 0.039</td> <td>    0.042</td> <td>    1.615</td>
+</tr>
+<tr>
+  <th>ma.L1</th>     <td>   -0.0225</td> <td>    0.427</td> <td>   -0.053</td> <td> 0.958</td> <td>   -0.860</td> <td>    0.815</td>
+</tr>
+<tr>
+  <th>ma.L2</th>     <td>   -0.8740</td> <td>    0.370</td> <td>   -2.362</td> <td> 0.018</td> <td>   -1.599</td> <td>   -0.149</td>
+</tr>
+<tr>
+  <th>ma.L3</th>     <td>   -0.0758</td> <td>    0.050</td> <td>   -1.521</td> <td> 0.128</td> <td>   -0.174</td> <td>    0.022</td>
+</tr>
+<tr>
+  <th>sigma2</th>    <td>   3.4e+14</td> <td> 7.37e-05</td> <td> 4.62e+18</td> <td> 0.000</td> <td>  3.4e+14</td> <td>  3.4e+14</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Ljung-Box (L1) (Q):</th>     <td>1.94</td> <th>  Jarque-Bera (JB):  </th> <td>4014680.83</td>
+</tr>
+<tr>
+  <th>Prob(Q):</th>                <td>0.16</td> <th>  Prob(JB):          </th>    <td>0.00</td>   
+</tr>
+<tr>
+  <th>Heteroskedasticity (H):</th> <td>0.89</td> <th>  Skew:              </th>    <td>-9.07</td>  
+</tr>
+<tr>
+  <th>Prob(H) (two-sided):</th>    <td>0.00</td> <th>  Kurtosis:          </th>    <td>99.08</td>  
+</tr>
+</table><br/><br/>Warnings:<br/>[1] Covariance matrix calculated using the outer product of gradients (complex-step).<br/>[2] Covariance matrix is singular or near-singular, with condition number 2.99e+32. Standard errors may be unstable.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Evaluating residuals</span>
+<span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">auto_arima_model</span><span class="o">.</span><span class="n">resid</span><span class="p">(),</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_122_0.png" src="../_images/ts-3-concepts_122_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Here we see the auto_arima selects an ARIMA model with order 2,1,3. In our manual analysis using statsmodel package, the model with 2,1,3 could not converge. We can make changes to the default parameters to the function to give it more information.</p></li>
+<li><p>An important information criteria is oob which selects model based on the score performance of the model on a validation set. Let’s try that.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## The commented parameters can be uncommented based on the need.</span>
+
+<span class="n">aam</span> <span class="o">=</span> <span class="n">auto_arima</span><span class="p">(</span>
+    <span class="n">ts</span><span class="p">,</span>
+    <span class="c1">#            exogenous=,</span>
+    <span class="c1">#            m=12, SARIMAX s</span>
+    <span class="n">max_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_p</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>  <span class="c1"># Search till p=6</span>
+    <span class="n">max_q</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>  <span class="c1"># Search till q=6</span>
+    <span class="n">max_d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># Search till d=2</span>
+    <span class="c1">#            max_P= #Search till P=2</span>
+    <span class="c1">#            max_Q= #Search till Q=2</span>
+    <span class="c1">#            max_D= #Search till D=2</span>
+    <span class="n">maxiter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>  <span class="c1"># Increase if you see no convergence</span>
+    <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># Number of parallel processes</span>
+    <span class="c1">#           trend=&quot;ct&quot;, ##ctt for quadratic; accounts for trend in data</span>
+    <span class="n">information_criterion</span><span class="o">=</span><span class="s2">&quot;oob&quot;</span><span class="p">,</span>  <span class="c1"># out of bag aic, aicc, bic, hqic</span>
+    <span class="n">out_of_sample_size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">),</span>  <span class="c1">## Validation set of 20% for oob</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aam</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>SARIMAX Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>y</td>        <th>  No. Observations:  </th>    <td>10080</td>   
+</tr>
+<tr>
+  <th>Model:</th>           <td>SARIMAX(1, 1, 0)</td> <th>  Log Likelihood     </th> <td>-182942.835</td>
+</tr>
+<tr>
+  <th>Date:</th>            <td>Tue, 20 Apr 2021</td> <th>  AIC                </th> <td>365891.670</td> 
+</tr>
+<tr>
+  <th>Time:</th>                <td>19:37:05</td>     <th>  BIC                </th> <td>365913.324</td> 
+</tr>
+<tr>
+  <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>365898.997</td> 
+</tr>
+<tr>
+  <th></th>                     <td> - 10080</td>     <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>        <td>opg</td>       <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>intercept</th> <td> 7711.9077</td> <td> 8.06e-12</td> <td> 9.57e+14</td> <td> 0.000</td> <td> 7711.908</td> <td> 7711.908</td>
+</tr>
+<tr>
+  <th>ar.L1</th>     <td>    0.0669</td> <td>    0.005</td> <td>   12.802</td> <td> 0.000</td> <td>    0.057</td> <td>    0.077</td>
+</tr>
+<tr>
+  <th>sigma2</th>    <td> 3.476e+14</td> <td> 1.08e-18</td> <td>  3.2e+32</td> <td> 0.000</td> <td> 3.48e+14</td> <td> 3.48e+14</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Ljung-Box (L1) (Q):</th>     <td>3.05</td> <th>  Jarque-Bera (JB):  </th> <td>4207310.37</td>
+</tr>
+<tr>
+  <th>Prob(Q):</th>                <td>0.08</td> <th>  Prob(JB):          </th>    <td>0.00</td>   
+</tr>
+<tr>
+  <th>Heteroskedasticity (H):</th> <td>0.90</td> <th>  Skew:              </th>    <td>-9.25</td>  
+</tr>
+<tr>
+  <th>Prob(H) (two-sided):</th>    <td>0.00</td> <th>  Kurtosis:          </th>   <td>101.37</td>  
+</tr>
+</table><br/><br/>Warnings:<br/>[1] Covariance matrix calculated using the outer product of gradients (complex-step).<br/>[2] Covariance matrix is singular or near-singular, with condition number    inf. Standard errors may be unstable.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgt</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">aam</span><span class="o">.</span><span class="n">resid</span><span class="p">(),</span> <span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient of correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lags&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ts-3-concepts_126_0.png" src="../_images/ts-3-concepts_126_0.png" />
+</div>
+</div>
+<p>With updated parameters, especially the information criterion as “oob” we see the function selects an inferior model in terms of AIC and significance of the coefficients. However this model performs well on the validation set. We need to conduct further experiments with a test set to find the generalizability of these models.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<p>Awesome! Apologies for a really long notebook, but we have learnt how to understand characteristics of a time series and then how to model it. Next, we are going to look at how we can forecast using these models.</p>
+<div class="section" id="referrences">
+<h2>Referrences<a class="headerlink" href="#referrences" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>A lot of the content in this notebook has been adapted from this <a class="reference external" href="https://www.youtube.com/playlist?list=PLtIY5kwXKny91_IbkqcIXuv6t1prQwFhO">youtube playlist</a>.</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="ts-2-visualization.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Time series manipulation and visualization</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="ts-4-forecasting.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Forecasting</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By AIOps<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
