@@ -1,0 +1,10 @@
+-e .
+awscli
+kaleido
+matplotlib
+pandas
+plotly
+pmdarima
+prometheus-api-client
+seaborn
+statsmodels
